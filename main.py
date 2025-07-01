@@ -16,6 +16,15 @@ from betfairlightweight import filters
 import pythoncom
 import win32com.client
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import os
+
 # Connect to Betfair API
 api = betfairlightweight.APIClient('smudge2049', 'Dex17@£141117', '4oAYsDJiYA7P5Wej')
 api.login_interactive()
@@ -126,22 +135,75 @@ class MatchFinder:
         
         print(self.df)
 
-    def get_daily_sheets(self):
-        print('\nQuerying Daily Sheets for stats...')
-        ###############################################
-        self.df_sheets.columns = self.df_sheets.iloc[0]
+    def get_sports_iq_stats(self):
+        print('\nConnecting to Sports-IQ to download stats...')
+        # Initialize Selenium WebDriver with Edge options
+        edge_options = Options()
+        edge_options.add_argument("--headless=new")  # or "--headless" if "new" doesn't work
+        edge_options.add_argument("--window-size=1920,1080")  # needed if elements aren't visible
 
-        self.df_sheets = self.df_sheets.drop(self.df_sheets.index[0])
+        # Delete file download if it already exists
+        data_file_path = r"C:\Users\Sam\FootballTrader v0.3.2\Football Data Fixtures.xlsx"
+        if os.path.exists(data_file_path):
+            os.remove(data_file_path)
 
-        self.df_sheets.rename(columns={'Home Team': 'home_team'}, inplace=True)
-        self.df_sheets.rename(columns={'Away Team': 'away_team'}, inplace=True)
 
-        self.df_sheets['event'] = self.df_sheets['home_team'] + ' v ' + self.df_sheets['away_team']
+        prefs = {
+                "download.default_directory": r"C:\Users\Sam\FootballTrader v0.3.2",  # Change to your desired directory
+                "download.prompt_for_download": False,  # Disable download prompt
+                "download.directory_upgrade": True,
+                "safebrowsing.enabled": True  # Enable safe browsing
+                }
+        edge_options.add_experimental_option("prefs", prefs)
 
-        self.df_sheets.to_excel('daily_sheet_stats.xlsx', engine='openpyxl')
-        cnx = sqlite3.connect(autotrader_db_path, check_same_thread=False)
-        self.df_sheets.to_sql(name='daily_sheet_stats', con=cnx, if_exists='replace')
-        cnx.close()
+        service = EdgeService(executable_path=r'C:/Program Files (x86)/msedgedriver.exe')
+        driver = webdriver.Edge(service=service, options=edge_options)
+
+        # Load the login page
+        url = 'https://sports-iq.co.uk/login/'
+        driver.get(url)
+
+        # Wait for the login form to be loaded and enter login details
+        while True:
+            try:
+                # Make instances of input boxes for login
+                username_input = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.ID, 'login_email')))  # Adjust selector as needed
+                password_input = driver.find_element(By.ID, 'password')  # Adjust selector as needed
+
+                # Enter your login credentials
+                username_input.send_keys('samcsmith17@gmail.com')
+                password_input.send_keys('Dexyboy17!')
+                password_input.send_keys(Keys.RETURN)
+
+                # Wait for the next page to load
+                tool_dropdown = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'menu-text') and text()='Tools']"))
+                )
+                tool_dropdown.click()
+
+                custom_tables = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'menu-text') and text()='Custom Tables']"))
+                )
+                custom_tables.click()
+
+                football_table = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'table_name') and text()='Football Data']"))
+                )
+                football_table.click()
+
+                excel_export = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'btn btn-secondary buttons-excel buttons-html5 ms-3 btn-sm btn-outline-default')]"))
+                )
+                excel_export.click()
+
+                break
+            except Exception as e:
+                print(f"\nAn error occurred: {e}\n")
+                driver.quit()
+                time.sleep(10)
+                print('Re-attempting connection with driver.')
+        time.sleep(1)
 
     def merge_data(self):
         """
@@ -253,5 +315,5 @@ if __name__ == '__main__':
     # pd.set_option('expand_frame_repr', False)
     mf = MatchFinder(continuos='off')
     mf.get_betfair_details()
-    mf.get_daily_sheets()
+    mf.get_sports_iq_stats()
     # mf.merge_data()
