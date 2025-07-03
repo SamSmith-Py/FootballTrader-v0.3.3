@@ -312,14 +312,126 @@ class AutoTrader:
 
 class BackTester:
     def __init__(self):
-        pass
+        self.con = sqlite3.connect(autotrader_db_path, check_same_thread=False)
+        df = pd.read_sql_query("SELECT * from archive_v2", self.con)
+
+        # Set up columns required for backtesting
+        df['home_ht_score'] = [int(x[0]) for x in df['ht_score'].values]
+        df['away_ht_score'] = [int(x[-1]) for x in df['ht_score'].values]
+
+        df['home_ft_score'] = [int(x[0]) for x in df['ft_score'].values]
+        df['away_ft_score'] = [int(x[-1]) for x in df['ft_score'].values]
+
+        df['total_goals'] = df['home_ft_score'] + df['away_ft_score']
+
+        df['ht_result'] = np.where(df['home_ht_score'] == df['away_ht_score'], 'draw', 0)
+        df['ht_result'] = np.where(df['home_ht_score'] > df['away_ht_score'], 'home', df['ht_result'])
+        df['ht_result'] = np.where(df['home_ht_score'] < df['away_ht_score'], 'away', df['ht_result'])
+
+        df['ft_result'] = np.where(df['home_ft_score'] == df['away_ft_score'], 'draw', 0)
+        df['ft_result'] = np.where(df['home_ft_score'] > df['away_ft_score'], 'home', df['ft_result'])
+        df['ft_result'] = np.where(df['home_ft_score'] < df['away_ft_score'], 'away', df['ft_result'])
+
+        df.copy()['Odds Betfair Draw'] = np.where(df['Odds Betfair Draw'] == 'nan', np.nan, df['Odds Betfair Draw'])
+        df['Odds Betfair Draw'] = np.where(df['Odds Betfair Draw'] == 'None', np.nan, df['Odds Betfair Draw'])
+        df.replace('None', np.nan, inplace=True)
+        df.replace('nan', np.nan, inplace=True)
+        df['Odds Betfair Draw'].bfill(inplace=True)
+        df['Odds Betfair Draw'].ffill(inplace=True)
+
+        train_data, validate_data, test_data = self.split_data(df)
+
+        # Optimise LTD strategy with Training data
+        self.optimise_ltd_strategy(train_data)
+
+    def split_data(self, df):
+        split_60_percent = round(len(df)*0.6)
+        split_80_percent = round(len(df)*0.8)
+        
+        train_data = df.iloc[:split_60_percent]
+        validate_data = df.iloc[split_60_percent:split_80_percent]
+        test_data = df.iloc[split_80_percent:]
+        return train_data, validate_data, test_data
+    
+    def optimise_ltd_strategy(self, train_data, df=None):
+        # Set strategy criteria to be optimised 
+        hva_pos = [10, 11, 12, 13, 14, 15]
+        hva_neg = [-10, -11, -12, -13, -14, -15]
+        goal_edge_pos = [1, 2, 3, 4, 5]
+        goal_edge_neg = [-1, -2, -3, -4, -5]
+        last8_25 = [0.3, 0.35, 0.4, 0.45, 0.5]
+
+        # Create list of combination lists
+        combinations = list(product(hva_pos, hva_neg, goal_edge_pos, goal_edge_neg, last8_25))
+
+        # Empty list to append results to display in a df 
+        hva_pos_col = []
+        hva_neg_col = []
+        goal_edge_pos_col = []
+        goal_edge_neg_col = []
+        last8_25_col = []
+        draw_perc_col = []
+        total_matches_col = []
+        total_no_draw_col = []
+        total_draw_col = []
+        avg_loss_draw_price = []
+
+        # Iterate through combinations for strategy criteria
+        with Bar('Processing...', max=len(combinations), fill="\u26BD") as bar:
+            # bar.max(len(train_data))
+            for comb in combinations:
+                df_opt = train_data[(train_data['GP Avg'].astype(float) >= 8) &
+                                    ((train_data['Form H v A'].astype(float) >= comb[0]) | (train_data['Form H v A'].astype(float) <= comb[1])) &  # Rel2 pos and neg min limits
+                                    ((train_data['Form Goal Edge'] <= comb[2]) & (train_data['Form Goal Edge'] >= comb[3])) &  # Magic number range
+                                    (train_data['Goals 2.5+ L8 Avg'] >= comb[4])]  # Percentage of 2.5 goals
+                # Add data to relevant column lists
+                hva_pos_col.append(comb[0])
+                hva_neg_col.append(comb[1])
+                goal_edge_pos_col.append(comb[2])
+                goal_edge_neg_col.append(comb[3])
+                last8_25_col.append(comb[4])
+
+                draw_perc_col.append(df_opt['ft_result'].value_counts(normalize=True).get('draw'))
+                total_matches_col.append(len(df_opt))
+                total_no_draw_col.append(len(df_opt[(df_opt['ft_result'] != 'draw')]))
+                total_draw_col.append(len(df_opt[(df_opt['ft_result'] == 'draw')]))
+                draw_result_df = df_opt[(df_opt['ft_result'] == 'draw')]
+                draw_result_df.copy().loc[draw_result_df['Odds Betfair Draw'] == 'nan'] = np.nan
+                draw_result_df.copy()['Odds Betfair Draw'] = draw_result_df['Odds Betfair Draw'].bfill()
+                avg_loss_draw_price.append(draw_result_df['Odds Betfair Draw'].astype(float).mean(skipna=True))
+                bar.next()
+
+        # Create df of all optimised results
+        optimised_df = pd.DataFrame({'hva_pos': hva_pos_col, 'hva_neg': hva_neg_col, 
+                                     'goal_edge_pos': goal_edge_pos_col,'goal_edge_neg': goal_edge_neg_col, 'last8_25': last8_25_col,
+                                    'draw_perc': draw_perc_col,
+                                    'total_matches': total_matches_col,
+                                    'no_draw': total_no_draw_col,
+                                    'draw': total_draw_col,
+                                    'avg_draw_loss_price': avg_loss_draw_price}).sort_values(by=['draw_perc'])
+        
+        # Calculate the pnl for all results
+        optimised_df['profit'] = optimised_df['no_draw'] * 98
+        optimised_df['loss'] = ((optimised_df['avg_draw_loss_price'] - 1) * 100) * optimised_df['draw']
+        optimised_df['loss'].loc[optimised_df['draw'] == 0] = 0
+        optimised_df['pnl'] = optimised_df['profit'] - optimised_df['loss'] 
+        optimised_df = optimised_df.loc[(optimised_df['draw_perc'] <= 0.17) & (optimised_df['total_matches'] > 300)]
+        optimised_df.sort_values(by=['pnl', 'total_matches', 'draw_perc'], ascending=[False, False, True], inplace=True)  # sort df by highest pnl value
+
+        # Save the top 1000 General strategy optimised results
+        optimised_df.head(1000).to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Optimised_Strategy_Results\optimised_LTD_strategy.html")
+        optimised_df.reset_index(inplace=True)
+
 
 if __name__ == '__main__':
     #pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
     #pd.set_option('expand_frame_repr', False)
-    mf = MatchFinder(continuos='on')
-    mf.get_betfair_details()
-    mf.get_sports_iq_stats()
-    mf.merge_data()
-    mf.add_matches_to_db()
+    #mf = MatchFinder(continuos='on')
+    #mf.get_betfair_details()
+    #mf.get_sports_iq_stats()
+    #mf.merge_data()
+    #mf.add_matches_to_db()
+
+    bt = BackTester()
+
