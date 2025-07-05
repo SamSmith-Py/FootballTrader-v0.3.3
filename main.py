@@ -291,7 +291,7 @@ class MatchFinder:
         values = {'goals_15': 0, 'goals_30': 0, 'goals_45': 0, 'goals_60': 0, 'goals_75': 0, 'goals_90': 0,
                   'home_score': 0, 'away_score': 0}
         df_autotrader.fillna(value=values, inplace=True)
-
+        
         # Save the dataframe to AutoTrader database
         cnx = sqlite3.connect(autotrader_db_path, check_same_thread=False)
         df_autotrader.to_sql(name='autotrader_matches_v3', con=cnx, if_exists='append', index=False) # Change to append once testing is complete
@@ -308,7 +308,103 @@ class MatchFinder:
 
 class AutoTrader:
     def __init__(self):
+        # balance = api.account.get_account_funds()
+
+        # Variable placeholders
+        self.cnx = None
+        self.df = None
+        self.run = None      
+
+        self.col_dtypes = {}   
+        self.max_lay_the_draw_price = 5
+
+        # Time required to wait for next run_autotrader run through
+        self.wait_time = 10  # Seconds
+
+    def initialise_data(self):
+        # Connect to autotrader database if not conected.
+        if not self.is_database_connected():
+            self.connect_autotrader_db()
+        self.df = pd.read_sql_query("SELECT * from autotrader_matches_v2", self.cnx, dtype=self.col_dtypes) 
+
+    def connect_autotrader_db(self):
+        """
+        Creates an instance for the connection to the autotrader database.
+        :return:
+        """
+        self.cnx = sqlite3.connect(autotrader_db_path, check_same_thread=False)
+    
+    def close_connection_db(self):
+        """
+        Close database connections if open.
+        :return:
+        """
+        if self.cnx:
+            self.cnx.close()
+
+    def is_database_connected(self):
+        try:
+            # Attempt to execute a simple query
+            self.cnx.execute("SELECT * from autotrader_matches_v2")
+            return True
+        except sqlite3.ProgrammingError:
+            return False
+        except AttributeError:
+            return False
+
+    def assign_strategy(self, betting='paper'):
+        # Connect to autotrader database if not conected.
+        if not self.is_database_connected():
+            self.connect_autotrader_db()
+        # Get LTD strategy criteria
+        df_LTD_strat = pd.read_sql_query("SELECT * from LTD_strategy_criteria", self.cnx, dtype=self.col_dtypes)
+
+        # Assign strategy to any events applicable
+        self.df['strategy'].loc[
+                                (self.df['GP Avg'] >= 8) & 
+                                (self.df['Form H v A'] >= df_LTD_strat.loc[0, 'hva_pos'] | self.df['Form H v A'] <= df_LTD_strat.loc[0, 'hva_neg']) &
+                                (self.df['Form Goal Edge'] <= df_LTD_strat.loc[0, 'goal_edge_pos']) &
+                                (self.df['Form Goal Edge'] >= df_LTD_strat.loc[0, 'goal_edge_neg']) & 
+                                (self.df['Goals 2.5+ L8 Avg'] >= df_LTD_strat.loc[0, 'last8_25']) 
+                                ] = 'LTD'
+
+        # Decide if live or paper betting for strategy
+        self.df['live/paper'].loc[(self.df['strategy'] == 'LTD')] = betting
+
+
+    def run_autotrader(self, continuous='off'):
         pass
+
+    def stop_autotrader(self):
+        """
+        Stops the loop that monitors for trade-able matches.
+        :return:
+        """
+        # Check if there is an open connection, if not connect to database.
+        if not self.is_database_connected():
+            self.connect_autotrader_db()
+        self.run = False  # Stop while loop.
+        # Save all match updates to database.
+        self.df.to_sql(name='autotrader_matches_v3', con=self.cnx, if_exists='replace', index=False)
+        self.close_connection_db()  # Close any connection to db.
+
+    def continuos_match_finder(self, activate='off'):
+        # This is the Continuos MAtchFinder feature. When this is activated it will stop the AutoTrader tool, run the MatchFinder tool then restart the AutoTrader.
+        self.df['marketStartTime'] = pd.to_datetime(self.df['marketStartTime'])
+        latest_kickoff  = self.df['marketStartTime'].max()
+        if activate == 'on':
+            if datetime.now(timezone.utc) > latest_kickoff:
+                self.stop_autotrader()
+                
+                mf = MatchFinder(continuos=activate)
+                mf.get_match_details()
+                mf.get_daily_sheets()
+                df = mf.merge_data()
+                if len(df) > 0:
+                    mf.add_matches_to_db(df)
+                    self.initialise_data()
+                    self.assign_strategy()
+                self.run_autotrader(continuos=activate)
 
 class BackTester:
     def __init__(self):
@@ -342,7 +438,10 @@ class BackTester:
         train_data, validate_data, test_data = self.split_data(df)
 
         # Optimise LTD strategy with Training data
-        self.optimise_ltd_strategy(train_data)
+        filt, opt = self.optimise_ltd_strategy(train_data)
+
+        # Validate LTD strategy
+        self.validate_ltd_strategy(validate_data, filt, opt)
 
     def split_data(self, df):
         split_60_percent = round(len(df)*0.6)
@@ -354,15 +453,17 @@ class BackTester:
         return train_data, validate_data, test_data
     
     def optimise_ltd_strategy(self, train_data, df=None):
+        
         # Set strategy criteria to be optimised 
         hva_pos = [10, 11, 12, 13, 14, 15]
         hva_neg = [-10, -11, -12, -13, -14, -15]
         goal_edge_pos = [1, 2, 3, 4, 5]
         goal_edge_neg = [-1, -2, -3, -4, -5]
         last8_25 = [0.3, 0.35, 0.4, 0.45, 0.5]
+        draw_odds = [5]
 
         # Create list of combination lists
-        combinations = list(product(hva_pos, hva_neg, goal_edge_pos, goal_edge_neg, last8_25))
+        combinations = list(product(hva_pos, hva_neg, goal_edge_pos, goal_edge_neg, last8_25, draw_odds))
 
         # Empty list to append results to display in a df 
         hva_pos_col = []
@@ -383,7 +484,8 @@ class BackTester:
                 df_opt = train_data[(train_data['GP Avg'].astype(float) >= 8) &
                                     ((train_data['Form H v A'].astype(float) >= comb[0]) | (train_data['Form H v A'].astype(float) <= comb[1])) &  # Rel2 pos and neg min limits
                                     ((train_data['Form Goal Edge'] <= comb[2]) & (train_data['Form Goal Edge'] >= comb[3])) &  # Magic number range
-                                    (train_data['Goals 2.5+ L8 Avg'] >= comb[4])]  # Percentage of 2.5 goals
+                                    (train_data['Goals 2.5+ L8 Avg'] >= comb[4]) & # Percentage of 2.5 goals
+                                    (train_data['Odds Betfair Draw'].astype(float) <= comb[5])]  
                 # Add data to relevant column lists
                 hva_pos_col.append(comb[0])
                 hva_neg_col.append(comb[1])
@@ -415,12 +517,126 @@ class BackTester:
         optimised_df['loss'] = ((optimised_df['avg_draw_loss_price'] - 1) * 100) * optimised_df['draw']
         optimised_df['loss'].loc[optimised_df['draw'] == 0] = 0
         optimised_df['pnl'] = optimised_df['profit'] - optimised_df['loss'] 
-        optimised_df = optimised_df.loc[(optimised_df['draw_perc'] <= 0.17) & (optimised_df['total_matches'] > 300)]
+        optimised_df = optimised_df.loc[(optimised_df['draw_perc'] <= 0.17) & (optimised_df['total_matches'] > 200)]
         optimised_df.sort_values(by=['pnl', 'total_matches', 'draw_perc'], ascending=[False, False, True], inplace=True)  # sort df by highest pnl value
 
-        # Save the top 1000 General strategy optimised results
+        # Save the top 1000 LTD strategy optimised results
         optimised_df.head(1000).to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Optimised_Strategy_Results\optimised_LTD_strategy.html")
         optimised_df.reset_index(inplace=True)
+
+        # Apply general strategy to train data    
+        idx = 0   
+        df_train = train_data[(train_data['GP Avg'].astype(float) >= 8) &
+                              ((train_data['Form H v A'].astype(float) >= optimised_df.loc[idx, 'hva_pos']) | (train_data['Form H v A'].astype(float) <= optimised_df.loc[idx, 'hva_neg'])) &  # Rel2 pos and neg min limits
+                                ((train_data['Form Goal Edge'] <= optimised_df.loc[idx, 'goal_edge_pos']) & (train_data['Form Goal Edge'] >= optimised_df.loc[idx, 'goal_edge_neg'])) &  # Magic number range
+                                (train_data['Goals 2.5+ L8 Avg'] >= optimised_df.loc[idx, 'last8_25']) &
+                                    (train_data['Odds Betfair Draw'].astype(float) <= 5)]
+        df_train['pnl'] = 98
+        df_train['pnl'] = np.where(df_train['ft_result'] == 'draw', -100 * (df_train['Odds Betfair Draw'].astype(float) - 1), df_train['pnl'])
+        df_train['cumsum'] = df_train.copy()['pnl'].cumsum()
+        df_train.reset_index(inplace=True)
+        df_train.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Optimised_Strategy_Results\all_trades.html")
+        df_train['cumsum'].plot(title='LTD Strategy Training Data - P&L').legend(['Optimised GS'])
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\optimised_LTD_strategy_train_data_pnl.png')
+
+        # create league performance results
+        leagues_pnl = round(df_train.groupby(['League'])['pnl'].sum().reset_index(), 2)
+        leagues_lose = df_train.groupby('League')['ft_result'].apply(lambda x: (x=='draw').sum()).reset_index()
+        leagues_lose.rename(columns={'ft_result': 'loss'}, inplace=True)
+        leagues_win = df_train.groupby('League')['ft_result'].apply(lambda x: (x!='draw').sum()).reset_index()
+        leagues_win.rename(columns={'ft_result': 'win'}, inplace=True)
+        league_data = leagues_pnl.merge(leagues_win, on='League', how='inner').merge(leagues_lose, on='League', how='inner')
+        league_data['win_rate'] = round(league_data['win']/(league_data['win'] + league_data['loss'])*100, 2)
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Optimised_Strategy_Results\optimised_LTD_league_performance.html')
+        
+        poor_result_league = league_data.loc[(league_data['win_rate'] < 80) & (league_data['win'] + league_data['loss'] > 3)]
+        print(poor_result_league.sort_values(by='pnl'))
+        print(poor_result_league['pnl'].sum())
+
+        # Create a list of underpeforming leagues to remove from validation and testing. 
+        ## These leagues are identified to be unprofitable using LTD strategy.
+        # under_performing = ['England, National League', 'Denmark, Superliga', 'England, League Two', 'Italy, Serie B', 'Austria, 2. Liga', 'Germany, Bundesliga']
+        under_performing = ['Denmark, Superliga', 'Italy, Serie B', 'Germany, Bundesliga']
+        all_leagues = league_data['League'].values
+        filtered_leagues = [league for league in all_leagues if league not in under_performing]
+        remove_league_train_data = train_data[train_data['League'].isin(filtered_leagues)]
+
+        remove_league_train_data = remove_league_train_data[(remove_league_train_data['GP Avg'].astype(float) >= 8) &
+                              ((remove_league_train_data['Form H v A'].astype(float) >= optimised_df.loc[idx, 'hva_pos']) | (remove_league_train_data['Form H v A'].astype(float) <= optimised_df.loc[idx, 'hva_neg'])) &  # Rel2 pos and neg min limits
+                                ((remove_league_train_data['Form Goal Edge'] <= optimised_df.loc[idx, 'goal_edge_pos']) & (remove_league_train_data['Form Goal Edge'] >= optimised_df.loc[idx, 'goal_edge_neg'])) &  # Magic number range
+                                (remove_league_train_data['Goals 2.5+ L8 Avg'] >= optimised_df.loc[idx, 'last8_25']) &
+                                    (remove_league_train_data['Odds Betfair Draw'].astype(float) <= 5)]
+        remove_league_train_data['pnl'] = 98
+        remove_league_train_data['pnl'] = np.where(remove_league_train_data['ft_result'] == 'draw', -100 * (remove_league_train_data['Odds Betfair Draw'].astype(float) - 1), remove_league_train_data['pnl'])
+        remove_league_train_data['cumsum'] = remove_league_train_data.copy()['pnl'].cumsum()
+        remove_league_train_data.reset_index(inplace=True)
+        remove_league_train_data.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Optimised_Strategy_Results\all_trades_remove_league.html")
+        remove_league_train_data['cumsum'].plot(title='LTD Strategy Training Data - P&L').legend(['Optimised LTD', 'Removed Leagues LTD'])
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\remove_league_train_data_pnl.png')
+
+        return filtered_leagues, optimised_df
+
+    def validate_ltd_strategy(self, validate_data, filtered_leagues, optimised_df):
+        idx=0
+
+        # Apply validated general strategy criteria to validate data
+        df = validate_data[(validate_data['GP Avg'].astype(float) >= 8) &
+                              ((validate_data['Form H v A'].astype(float) >= optimised_df.loc[idx, 'hva_pos']) | (validate_data['Form H v A'].astype(float) <= optimised_df.loc[idx, 'hva_neg'])) &  # Rel2 pos and neg min limits
+                                ((validate_data['Form Goal Edge'] <= optimised_df.loc[idx, 'goal_edge_pos']) & (validate_data['Form Goal Edge'] >= optimised_df.loc[idx, 'goal_edge_neg'])) &  # Magic number range
+                                (validate_data['Goals 2.5+ L8 Avg'] >= optimised_df.loc[idx, 'last8_25']) &
+                                    (validate_data['Odds Betfair Draw'].astype(float) <= 5)]
+        
+        # Add pnl and cumsum 
+        df['pnl'] = 98
+        df['pnl'] = np.where(df['ft_result'] == 'draw', -100 * (df['Odds Betfair Draw'].astype(float) - 1), df['pnl'])
+        df['cumsum'] = df['pnl'].cumsum()
+        df.reset_index(inplace=True)
+        df.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Validated_Strategy_Results\all_trades.html")
+        df['cumsum'].plot(title='Validated General Strategy - Validate Data - P&L').legend(['Optimised LTD', 'Removed Leagues LTD', 'Validated LTD'])
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\validated_LTD_strategy_validate_data_pnl.png')
+
+        # create league perormance results
+        leagues_pnl = round(df.groupby(['League'])['pnl'].sum().reset_index(), 2)
+        leagues_lose = df.groupby('League')['ft_result'].apply(lambda x: (x=='draw').sum()).reset_index()
+        leagues_lose.rename(columns={'ft_result': 'loss'}, inplace=True)
+        leagues_win = df.groupby('League')['ft_result'].apply(lambda x: (x!='draw').sum()).reset_index()
+        leagues_win.rename(columns={'ft_result': 'win'}, inplace=True)
+        league_data = leagues_pnl.merge(leagues_win, on='League', how='inner').merge(leagues_lose, on='League', how='inner')
+        league_data['win_rate'] = round(league_data['win']/(league_data['win'] + league_data['loss'])*100, 2)
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Validated_Strategy_Results\validated_LTD_league_performance.html')
+
+        print(df)
+        print(df['pnl'].sum())
+
+        validate_data = validate_data[validate_data['League'].isin(filtered_leagues)]
+        # Apply validated general strategy criteria to validate data
+        df = validate_data[(validate_data['GP Avg'].astype(float) >= 8) &
+                              ((validate_data['Form H v A'].astype(float) >= optimised_df.loc[idx, 'hva_pos']) | (validate_data['Form H v A'].astype(float) <= optimised_df.loc[idx, 'hva_neg'])) &  # Rel2 pos and neg min limits
+                                ((validate_data['Form Goal Edge'] <= optimised_df.loc[idx, 'goal_edge_pos']) & (validate_data['Form Goal Edge'] >= optimised_df.loc[idx, 'goal_edge_neg'])) &  # Magic number range
+                                (validate_data['Goals 2.5+ L8 Avg'] >= optimised_df.loc[idx, 'last8_25']) &
+                                    (validate_data['Odds Betfair Draw'].astype(float) <= 5)]
+        
+        # Add pnl and cumsum 
+        df['pnl'] = 98
+        df['pnl'] = np.where(df['ft_result'] == 'draw', -100 * (df['Odds Betfair Draw'].astype(float) - 1), df['pnl'])
+        df['cumsum'] = df['pnl'].cumsum()
+        df.reset_index(inplace=True)
+        df.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Validated_Strategy_Results\all_trades_remove_leagues.html")
+        df['cumsum'].plot(title='Validated General Strategy - Validate Data - P&L').legend(['Optimised LTD', 'Removed Leagues LTD', 'Validated LTD', 'Validated Removed Leagues LTD'])
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\removed_leagues_validated_LTD_strategy_validate_data_pnl.png')
+
+        print(df)
+        print(df['pnl'].sum())
+
+        # create league perormance results
+        leagues_pnl = round(df.groupby(['League'])['pnl'].sum().reset_index(), 2)
+        leagues_lose = df.groupby('League')['ft_result'].apply(lambda x: (x=='draw').sum()).reset_index()
+        leagues_lose.rename(columns={'ft_result': 'loss'}, inplace=True)
+        leagues_win = df.groupby('League')['ft_result'].apply(lambda x: (x!='draw').sum()).reset_index()
+        leagues_win.rename(columns={'ft_result': 'win'}, inplace=True)
+        league_data = leagues_pnl.merge(leagues_win, on='League', how='inner').merge(leagues_lose, on='League', how='inner')
+        league_data['win_rate'] = round(league_data['win']/(league_data['win'] + league_data['loss'])*100, 2)
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Validated_Strategy_Results\removed_leagues_validated_LTD_league_performance.html')
 
 
 if __name__ == '__main__':
