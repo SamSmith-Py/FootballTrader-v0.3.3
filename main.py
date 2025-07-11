@@ -332,6 +332,7 @@ class AutoTrader:
             self.connect_autotrader_db()
         self.df = pd.read_sql_query("SELECT * from autotrader_matches_v3", self.cnx, dtype=self.col_dtypes) 
 
+
     def connect_autotrader_db(self):
         """
         Creates an instance for the connection to the autotrader database.
@@ -371,9 +372,9 @@ class AutoTrader:
         for row in self.df.index:
             if int(self.df.loc[row, 'GP Avg']) >= 8 and \
                 (int(self.df.loc[row, 'Form H v A']) >= df_LTD_strat.loc[0, 'hva_pos'] or int(self.df.loc[row, 'Form H v A']) <= df_LTD_strat.loc[0, 'hva_neg']) and \
-                int(self.df.loc[row, 'Form Goal Edge']) <= df_LTD_strat.loc[0, 'goal_edge_pos'] and \
-                int(self.df.loc[row, 'Form Goal Edge']) >= float(df_LTD_strat.loc[0, 'goal_edge_neg']) and \
-                int(self.df.loc[row, 'Goals 2.5+ L8 Avg']) >= df_LTD_strat.loc[0, 'last8_25']:
+                float(self.df.loc[row, 'Form Goal Edge']) <= df_LTD_strat.loc[0, 'goal_edge_pos'] and \
+                float(self.df.loc[row, 'Form Goal Edge']) >= float(df_LTD_strat.loc[0, 'goal_edge_neg']) and \
+                float(self.df.loc[row, 'Goals 2.5+ L8 Avg']) >= df_LTD_strat.loc[0, 'last8_25']:
                     self.df.loc[row, 'strategy'] = 'LTD'
         
         # Decide if live or paper betting for strategy
@@ -461,18 +462,18 @@ class AutoTrader:
         remove from databases as necessary.
         :return:
         """
+        get_scores = api.in_play_service.get_scores(event_ids=[event_id])
+        # Get inplay state if available.
+        if len(get_scores) > 0:
+            for x in get_scores:
+                self.df.loc[idx, 'inplay_state'] = x.match_status
+
         # If time is over 3 hours past kick off then mark as finished
         self.df['marketStartTime'] = pd.to_datetime(self.df['marketStartTime'])
         if datetime.now(timezone.utc) - self.df.loc[idx, 'marketStartTime'] > timedelta(hours=4):
             self.df.loc[idx, 'ft_score'] = self.df.loc[idx, 'score']
             self.df.loc[idx, 'inplay_state'] = 'Finished'
             self.check_paper_bet_result(idx)
-            
-        get_scores = api.in_play_service.get_scores(event_ids=[event_id])
-        # Get inplay state if available.
-        if len(get_scores) > 0:
-            for x in get_scores:
-                self.df.loc[idx, 'inplay_state'] = x.match_status
 
         # If match finished check if traded. If traded then update trading log. Archive all and remove from trading log
         # database if un-traded.
@@ -735,7 +736,7 @@ class AutoTrader:
             self.df.loc[idx, 'current_order_status'] = 'EXECUTION_COMPLETE'
             self.df.loc[idx, 'current_order_betid'] = 0
 
-            self.adjust_paper_account(amount=self.ltd_paper_stake_size * 3.5, adjustment='decrease')
+            self.adjust_paper_account(amount=self.ltd_paper_stake_size * (self.df.loc[idx, 'lay_price'] - 1), adjustment='decrease')
 
     def stop_autotrader(self):
         """
@@ -803,18 +804,18 @@ class AutoTrader:
                     print('*'*200)
                     print(pd.Timestamp.now())
                     print('*'*200)
-                    if datetime.now(timezone.utc) > latest_kickoff:
-                        self.stop_autotrader()
-                        
-                        mf = MatchFinder(continuous=activate)
-                        mf.get_betfair_details()
-                        mf.get_sports_iq_stats()
-                        df = mf.merge_data()
-                        if len(df) > 0:
-                            mf.add_matches_to_db()
-                            self.initialise_data()
-                            self.assign_strategy()
-                        self.run_autotrader(continuous=activate)
+                    # if datetime.now(timezone.utc) > latest_kickoff:
+                    self.stop_autotrader()
+                    
+                    mf = MatchFinder(continuous=activate)
+                    mf.get_betfair_details()
+                    mf.get_sports_iq_stats()
+                    df = mf.merge_data()
+                    if len(df) > 0:
+                        mf.add_matches_to_db()
+                        self.initialise_data()
+                        self.assign_strategy()
+                    self.run_autotrader(continuous=activate)
 
     def adjust_paper_account(self, amount, adjustment):
         if not self.is_database_connected():
@@ -834,7 +835,7 @@ class AutoTrader:
         if self.df.loc[idx, 'strategy'] == 'LTD' and self.df.loc[idx, 'live/paper'] == 'paper':
             if int(self.df.loc[idx, 'entry_ordered']) == 1:
                 if self.df.loc[idx, 'home_score'] != self.df.loc[idx, 'away_score']:
-                    paper_profit = (self.ltd_paper_stake_size * 3.5) + (self.ltd_paper_stake_size - (self.ltd_paper_stake_size * 0.02))
+                    paper_profit = (self.ltd_paper_stake_size * (self.df.loc[idx, 'lay_price'] - 1)) + (self.ltd_paper_stake_size - (self.ltd_paper_stake_size * 0.02))
                     self.adjust_paper_account(amount=paper_profit , adjustment='increase')
 
     def strategy_ltd(self, idx):
@@ -847,6 +848,14 @@ class AutoTrader:
                                      ptype='PERSIST',
                                      idx=idx,
                                      side='LAY')
+            if datetime.now(timezone.utc) < self.df.loc[idx, 'marketStartTime'] and float(self.df.loc[idx, 'lay_price']) < 3.5:
+                print(f"ENTRY ORDER PLACED for LTD: {self.df.loc[idx, 'event_name']}")
+                self.place_lay_order(size=self.ltd_live_stake_size, 
+                                     price=self.df.loc[idx, 'lay_price'], 
+                                     ptype='PERSIST',
+                                     idx=idx,
+                                     side='LAY')
+
        
 class BackTester:
     def __init__(self):
@@ -880,10 +889,11 @@ class BackTester:
         train_data, validate_data, test_data = self.split_data(df)
 
         # Optimise LTD strategy with Training data
-        filt, opt = self.optimise_ltd_strategy(train_data)
-
+        # filt, opt = self.optimise_ltd_strategy_v2(train_data)
+        ll = self.no_strategy_LTD(train_data)
+        self.validate_no_strategy_LTD(ll, validate_data)
         # Validate LTD strategy
-        self.validate_ltd_strategy(validate_data, filt, opt)
+        # self.validate_ltd_strategy(validate_data, filt, opt)
 
     def split_data(self, df):
         split_60_percent = round(len(df)*0.6)
@@ -894,6 +904,71 @@ class BackTester:
         test_data = df.iloc[split_80_percent:]
         return train_data, validate_data, test_data
     
+    def no_strategy_LTD(self, train_data):
+        train_data['pnl'] = 98
+        train_data['pnl'] = np.where(train_data['ft_result'] == 'draw', -100 * (train_data['Odds Betfair Draw'].astype(float) - 1), train_data['pnl'])
+        train_data['cumsum'] = train_data.copy()['pnl'].cumsum()
+        train_data.reset_index(inplace=True)
+        train_data.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\no_strategy_LTD.html")
+        train_data['cumsum'].plot(title='LTD NO STRATEGY Training Data - P&L')
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\no_strategy_LTD_pnl.png')
+
+        # create league performance results
+        leagues_pnl = round(train_data.groupby(['League'])['pnl'].sum().reset_index(), 2)
+        leagues_lose = train_data.groupby('League')['ft_result'].apply(lambda x: (x=='draw').sum()).reset_index()
+        leagues_lose.rename(columns={'ft_result': 'loss'}, inplace=True)
+        leagues_win = train_data.groupby('League')['ft_result'].apply(lambda x: (x!='draw').sum()).reset_index()
+        leagues_win.rename(columns={'ft_result': 'win'}, inplace=True)
+        league_data = leagues_pnl.merge(leagues_win, on='League', how='inner').merge(leagues_lose, on='League', how='inner')
+        league_data['win_rate'] = round(league_data['win']/(league_data['win'] + league_data['loss'])*100, 2)
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\no_strategy_LTD_league_performance.html')
+
+        # filter low games played leagues
+        league_data['gp'] = league_data['win'] + league_data['loss']
+        league_data = league_data.loc[league_data['gp'] >= 8]
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\no_strategy_LTD_league_performance_1.html')
+        print(league_data['pnl'].sum())
+        league_data = league_data.loc[league_data['win_rate'] >= 75]
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\no_strategy_LTD_league_performance_2.html')
+        print(league_data['pnl'].sum())
+
+        league_list = league_data['League'].to_list()
+
+        train_data = train_data[train_data['League'].isin(league_list)]
+        train_data['pnl'] = 98
+        train_data['pnl'] = np.where(train_data['ft_result'] == 'draw', -100 * (train_data['Odds Betfair Draw'].astype(float) - 1), train_data['pnl'])
+        train_data['cumsum'] = train_data.copy()['pnl'].cumsum()
+        train_data.reset_index(inplace=True)
+        train_data.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\no_strategy_LTD.html")
+        train_data['cumsum'].plot(title='LTD NO STRATEGY 1 Training Data - P&L')
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\no_strategy_LTD_pnl_1.png')
+
+        return league_list
+    
+    def validate_no_strategy_LTD(self, league_list, validate_data):
+        print(league_list)
+        df = validate_data[validate_data['League'].isin(league_list)]
+         # Add pnl and cumsum 
+        df['pnl'] = 98
+        df['pnl'] = np.where(df['ft_result'] == 'draw', -100 * (df['Odds Betfair Draw'].astype(float) - 1), df['pnl'])
+        df['cumsum'] = df['pnl'].cumsum()
+        df.reset_index(inplace=True)
+        df.to_html(r"C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Validated_Strategy_Results\all_trades_no_strategy.html")
+        df['cumsum'].plot(title='Validated General Strategy - Validate Data - P&L').legend(['Optimised LTD', 'Removed Leagues LTD', 'Validated LTD', 'Validated Removed Leagues LTD'])
+        plt.savefig(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Plots\no_strategys_validated_LTD_strategy_validate_data_pnl.png')
+
+        # create league perormance results
+        leagues_pnl = round(df.groupby(['League'])['pnl'].sum().reset_index(), 2)
+        leagues_lose = df.groupby('League')['ft_result'].apply(lambda x: (x=='draw').sum()).reset_index()
+        leagues_lose.rename(columns={'ft_result': 'loss'}, inplace=True)
+        leagues_win = df.groupby('League')['ft_result'].apply(lambda x: (x!='draw').sum()).reset_index()
+        leagues_win.rename(columns={'ft_result': 'win'}, inplace=True)
+        league_data = leagues_pnl.merge(leagues_win, on='League', how='inner').merge(leagues_lose, on='League', how='inner')
+        league_data['win_rate'] = round(league_data['win']/(league_data['win'] + league_data['loss'])*100, 2)
+        league_data.sort_values('pnl', ascending=False).to_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\no_strategy_validated_LTD_league_performance.html')
+
+
+
     def optimise_ltd_strategy(self, train_data, df=None):
         
         # Set strategy criteria to be optimised 
