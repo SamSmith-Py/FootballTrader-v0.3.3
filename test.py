@@ -7,7 +7,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import os
+import pandas as pd
 import betfairlightweight
+import matplotlib.pyplot as plt
 
 
 def get_sports_iq_stats():
@@ -96,3 +98,8 @@ cleared = api.betting.list_cleared_orders(market_ids=[1.245350965], group_by='MA
 print(cleared)
 c = cleared.orders[0].profit
 print(c)"""
+
+df = pd.read_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Optimised_Strategy_Results\optimised_LTD_league_performance.html', index_col=0)[0]
+print(df)
+df.plot('League', 'pnl', kind='barh')
+plt.show()
