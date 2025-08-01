@@ -370,6 +370,10 @@ class AutoTrader:
         # Connect to autotrader database if not conected.
         if not self.is_database_connected():
             self.connect_autotrader_db()
+
+        # Get list of leagues that are eligible to assign.
+        leagues = pd.read_excel(r'C:\Users\Sam\FootballTrader v0.3.2\league_strike_rate.xlsx', index_col=0)['League'].to_list()
+
         # Get LTD strategy criteria
         df_LTD_strat = pd.read_sql_query("SELECT * from LTD_strategy_criteria", self.cnx, dtype=self.col_dtypes)
         # Assign strategy to any events applicable
@@ -378,8 +382,11 @@ class AutoTrader:
                 (int(self.df.loc[row, 'Form H v A']) >= df_LTD_strat.loc[0, 'hva_pos'] or int(self.df.loc[row, 'Form H v A']) <= df_LTD_strat.loc[0, 'hva_neg']) and \
                 float(self.df.loc[row, 'Form Goal Edge']) <= df_LTD_strat.loc[0, 'goal_edge_pos'] and \
                 float(self.df.loc[row, 'Form Goal Edge']) >= float(df_LTD_strat.loc[0, 'goal_edge_neg']) and \
-                float(self.df.loc[row, 'Goals 2.5+ L8 Avg']) >= df_LTD_strat.loc[0, 'last8_25']:
+                self.df.loc[row, 'League'] in leagues:
                     self.df.loc[row, 'strategy'] = 'LTD'
+            else:
+                self.df.loc[row, 'strategy'] = None
+                self.df['live/paper'].loc[(self.df['strategy'] == 'LTD')] = None
         
         # Decide if live or paper betting for strategy
         self.df['live/paper'].loc[(self.df['strategy'] == 'LTD')] = betting
@@ -446,7 +453,7 @@ class AutoTrader:
 
             # TESTING
             print(self.df[['event_name', 'League', 'live/paper', 'strategy', 'marketStartTime', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
-                           'score', 'entry_ordered']].sort_values(by=['start_date', 'start_time']))
+                           'score', 'entry_ordered', 'GP Avg', 'Form H v A', 'Form Goal Edge']].sort_values(by=['start_date', 'start_time']))
 
             self.continuos_match_finder(activate=continuous)
 
@@ -523,54 +530,59 @@ class AutoTrader:
         Checks score for selected match. Updates database.
         :return:
         """
-        scores = api.in_play_service.get_scores(event_ids=[event_id])
-        if len(scores) > 0 and self.df.loc[idx, 'time_elapsed'] != None:
-            for x in scores:
-                self.df.loc[idx, 'home_score'] = int(x.score.home.score)
-                self.df.loc[idx, 'away_score'] = int(x.score.away.score)
-                self.df.loc[idx, 'score'] = f'{int(x.score.home.score)} - {int(x.score.away.score)}'
-            try:
-                
-                # Get score for first 15 minutes
-                if self.df.loc[idx, 'time_elapsed'] <= 15:
-                    self.df.loc[idx, 'goals_15'] = f"{self.df.loc[idx, 'home_score']} - {self.df.loc[idx, 'away_score']}"            
-                # Get score within 15 - 30 minutes
-                if 15 < self.df.loc[idx, 'time_elapsed'] <= 30 and self.df.loc[idx, 'goals_15'] is not None:
-                    self.df.loc[idx, 'goals_30'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
-                # Get score within 30 - 45 minutes    
-                if 30 < self.df.loc[idx, 'time_elapsed'] <= 60 and \
-                        self.df.loc[idx, 'inplay_state'] == 'KickOff' and \
-                        self.df.loc[idx, 'goals_15'] is not None and \
-                        self.df.loc[idx, 'goals_30'] is not None:
-                    self.df.loc[idx, 'goals_45'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
-                # Get score within 45 - 60 minutes     
-                if 45 <= self.df.loc[idx, 'time_elapsed'] <= 60 and \
-                        self.df.loc[idx, 'inplay_state'] == 'SecondHalfKickOff' and \
-                        self.df.loc[idx, 'goals_15'] is not None and \
-                        self.df.loc[idx, 'goals_30'] is not None and \
-                        self.df.loc[idx, 'goals_45'] is not None:
-                    self.df.loc[idx, 'goals_60'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
-                 # Get score within 60 - 75 minutes   
-                if 60 < self.df.loc[idx, 'time_elapsed'] <= 75 and \
-                        self.df.loc[idx, 'goals_15'] is not None and \
-                        self.df.loc[idx, 'goals_30'] is not None and \
-                        self.df.loc[idx, 'goals_45'] is not None and \
-                        self.df.loc[idx, 'goals_60'] is not None:
-                    self.df.loc[idx, 'goals_75'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
-                # Get score within 75 - 90 minutes
-                if 75 < self.df.loc[idx, 'time_elapsed'] <= 120 and \
-                        self.df.loc[idx, 'goals_15'] is not None and \
-                        self.df.loc[idx, 'goals_30'] is not None and \
-                        self.df.loc[idx, 'goals_45'] is not None and \
-                        self.df.loc[idx, 'goals_60'] is not None and \
-                        self.df.loc[idx, 'goals_75'] is not None:
-                    self.df.loc[idx, 'goals_90'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
+        try:
+            scores = api.in_play_service.get_scores(event_ids=[event_id])
+        
+            if len(scores) > 0 and self.df.loc[idx, 'time_elapsed'] != None:
+                for x in scores:
+                    self.df.loc[idx, 'home_score'] = int(x.score.home.score)
+                    self.df.loc[idx, 'away_score'] = int(x.score.away.score)
+                    self.df.loc[idx, 'score'] = f'{int(x.score.home.score)} - {int(x.score.away.score)}'
+                try:
+                    
+                    # Get score for first 15 minutes
+                    if self.df.loc[idx, 'time_elapsed'] <= 15:
+                        self.df.loc[idx, 'goals_15'] = f"{self.df.loc[idx, 'home_score']} - {self.df.loc[idx, 'away_score']}"            
+                    # Get score within 15 - 30 minutes
+                    if 15 < self.df.loc[idx, 'time_elapsed'] <= 30 and self.df.loc[idx, 'goals_15'] is not None:
+                        self.df.loc[idx, 'goals_30'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
+                    # Get score within 30 - 45 minutes    
+                    if 30 < self.df.loc[idx, 'time_elapsed'] <= 60 and \
+                            self.df.loc[idx, 'inplay_state'] == 'KickOff' and \
+                            self.df.loc[idx, 'goals_15'] is not None and \
+                            self.df.loc[idx, 'goals_30'] is not None:
+                        self.df.loc[idx, 'goals_45'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
+                    # Get score within 45 - 60 minutes     
+                    if 45 <= self.df.loc[idx, 'time_elapsed'] <= 60 and \
+                            self.df.loc[idx, 'inplay_state'] == 'SecondHalfKickOff' and \
+                            self.df.loc[idx, 'goals_15'] is not None and \
+                            self.df.loc[idx, 'goals_30'] is not None and \
+                            self.df.loc[idx, 'goals_45'] is not None:
+                        self.df.loc[idx, 'goals_60'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
+                    # Get score within 60 - 75 minutes   
+                    if 60 < self.df.loc[idx, 'time_elapsed'] <= 75 and \
+                            self.df.loc[idx, 'goals_15'] is not None and \
+                            self.df.loc[idx, 'goals_30'] is not None and \
+                            self.df.loc[idx, 'goals_45'] is not None and \
+                            self.df.loc[idx, 'goals_60'] is not None:
+                        self.df.loc[idx, 'goals_75'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
+                    # Get score within 75 - 90 minutes
+                    if 75 < self.df.loc[idx, 'time_elapsed'] <= 120 and \
+                            self.df.loc[idx, 'goals_15'] is not None and \
+                            self.df.loc[idx, 'goals_30'] is not None and \
+                            self.df.loc[idx, 'goals_45'] is not None and \
+                            self.df.loc[idx, 'goals_60'] is not None and \
+                            self.df.loc[idx, 'goals_75'] is not None:
+                        self.df.loc[idx, 'goals_90'] = f"{int(self.df.loc[idx, 'home_score'])} - {int(self.df.loc[idx, 'away_score'])}"
 
-                if self.df.loc[idx, 'inplay_state'] == 'FirstHalfEnd':
-                    self.df.loc[idx, 'ht_score'] = self.df.loc[idx, 'score']    
+                    if self.df.loc[idx, 'inplay_state'] == 'FirstHalfEnd':
+                        self.df.loc[idx, 'ht_score'] = self.df.loc[idx, 'score']    
 
-            except TypeError:
-                logging.exception()
+                except TypeError:
+                    logging.exception()
+        except betfairlightweight.exceptions.StatusCodeError:
+            print('GetScores Status code error')
+            logging.exception()
 
     def check_lay_price(self, idx):
         """
@@ -856,7 +868,7 @@ class AutoTrader:
                                      ptype='PERSIST',
                                      idx=idx,
                                      side='LAY')
-            if datetime.now(timezone.utc) < self.df.loc[idx, 'marketStartTime'] and float(self.df.loc[idx, 'lay_price']) < 3.5:
+            if datetime.now(timezone.utc) < self.df.loc[idx, 'marketStartTime'] and float(self.df.loc[idx, 'lay_price']) < 3.4:
                 print(f"ENTRY ORDER PLACED for LTD: {self.df.loc[idx, 'event_name']}")
                 self.place_lay_order(size=self.ltd_live_stake_size, 
                                      price=self.df.loc[idx, 'lay_price'], 
