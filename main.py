@@ -198,17 +198,22 @@ class MatchFinder:
                     EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'btn btn-secondary buttons-excel buttons-html5 ms-3 btn-sm btn-outline-default')]"))
                 )
                 excel_export.click()
+
+                time.sleep(3)
+
+                # Check if correct file is in directory, if not then delete file
+                for filename in os.listdir(directory):
+                    file_path = os.path.join(directory, filename)
+                    if file_path != data_file_path:
+                        print('TEST 2')
+                        os.remove(file_path)
+                        time.sleep(3)
                 
                 # If correct file present then break loop
                 if os.path.exists(data_file_path):
+                    print('TEST 1')
                     break
-                # If wrong file name loaded then delete file and retry
-                else:
-                    for filename in os.listdir(directory):
-                        file_path = os.path.join(directory, filename)
-                        if file_path != data_file_path:
-                            os.remove(file_path)
-                    time.sleep(10)
+                
 
             except Exception as e:
                 print(f"\nAn error occurred: {e}\n")
