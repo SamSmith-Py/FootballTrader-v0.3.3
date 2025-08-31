@@ -903,10 +903,12 @@ class AutoTrader:
             offset_lay_price = 2.9
         if cur_price > 3.30 and cur_price <= 4:  # 0.05 increments
             offset_lay_price = cur_price - 0.30  
-        if cur_price > 4 and cur_price <= 5:  # 0.1 increments
+        if cur_price > 4 and cur_price <= 4.5:  # 0.1 increments
             offset_lay_price = cur_price - 0.6
+        if cur_price > 4.5 and cur_price <= 5:
+            offset_lay_price = 3.5
         if float(self.df.loc[idx, 'back_price']) > 5 or float(self.df.loc[idx, 'lay_price']) > 5:
-            offset_lay_price = 4.2
+            offset_lay_price = 4.0
         print('Offset Lay Price: ', round(offset_lay_price, 2))
         return round(offset_lay_price, 2)
     
@@ -1337,7 +1339,7 @@ class BackTester_v2:
             final_df['strike'] = round(final_df['Won'] / final_df['GP'] * 100, 2)
             final_df['pnl 4'] = round(final_df['Won'] * 98 - (final_df['Draw'] * 300), 2)
             final_df['pnl 3.5'] = round(final_df['Won'] * 98 - (final_df['Draw'] * 250), 2)
-            final_df = final_df.loc[(final_df['GP'] > 10) & (final_df['strike'] > 76)]
+            final_df = final_df.loc[(final_df['GP'] > 10) & (final_df['strike'] > 50)]
 
             final_df.to_excel('league_strike_rate.xlsx')
 
@@ -1529,17 +1531,17 @@ class BackTester_v2:
 
         selected_leagues = select_leagues(df)
 
-        train_data, validate_data = split_data(selected_leagues, df)
+        #train_data, validate_data = split_data(selected_leagues, df)
 
-        optimised_df = optimise_strategy(train_data)
+        #optimised_df = optimise_strategy(train_data)
 
-        train_strategy(train_data, optimised_df)
+        #train_strategy(train_data, optimised_df)
 
-        randomise_strategy_test(df, selected_leagues, optimised_df)
+        #randomise_strategy_test(df, selected_leagues, optimised_df)
 
-        reverse_strategy(train_data, optimised_df)
+        #reverse_strategy(train_data, optimised_df)
 
-        validate_strategy(validate_data, optimised_df)
+       # validate_strategy(validate_data, optimised_df)
 
 
 if __name__ == '__main__':

@@ -115,7 +115,7 @@ def open_db_get_results():
 
     wins_count = df['result'].value_counts().to_list()[0]
     loss_count = df['result'].value_counts().to_list()[1]
-    price = 3.5
+    price = 3.88
     profit = wins_count*0.98
     loss = loss_count * (price - 1)
     profit_and_loss = profit - loss
