@@ -1581,12 +1581,6 @@ if __name__ == '__main__':
                             logging.exception('API ERROR')
                             print('Betfair API Error...')
                             time.sleep(10)
-                        finally:
-                            print('Logging out Betfair API')
-                            api.logout()
-                            time.sleep(5)
-                            print('Logging in Betfair API')
-                            api.login_interactive()
 
         if tool == 'AutoTrader'or tool == 'at':
             print('<AutoTrader Running>')
@@ -1603,12 +1597,6 @@ if __name__ == '__main__':
                     logging.exception('API ERROR')
                     print('Betfair API Error...')
                     time.sleep(10)
-                finally:
-                    print('Logging out Betfair API')
-                    api.logout()
-                    time.sleep(5)
-                    print('Logging in Betfair API')
-                    api.login_interactive()
 
         if tool == 'BackTester' or tool == 'bt':
             print('<BackTester>')
