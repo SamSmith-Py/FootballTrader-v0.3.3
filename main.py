@@ -515,29 +515,34 @@ class AutoTrader:
         remove from databases as necessary.
         :return:
         """
-        get_scores = api.in_play_service.get_scores(event_ids=[event_id])
-        # Get inplay state if available.
-        if len(get_scores) > 0:
-            for x in get_scores:
-                self.df.loc[idx, 'inplay_state'] = x.match_status
+        try:
+            get_scores = api.in_play_service.get_scores(event_ids=[event_id])
+            # Get inplay state if available.
+            if len(get_scores) > 0:
+                for x in get_scores:
+                    self.df.loc[idx, 'inplay_state'] = x.match_status
 
-        # If time is over 3 hours past kick off then mark as finished
-        self.df['marketStartTime'] = pd.to_datetime(self.df['marketStartTime'])
-        if datetime.now(timezone.utc) - self.df.loc[idx, 'marketStartTime'] > timedelta(hours=4):
-            self.df.loc[idx, 'ft_score'] = self.df.loc[idx, 'score']
-            self.df.loc[idx, 'inplay_state'] = 'Finished'
-            self.check_paper_bet_result(idx)
+            # If time is over 3 hours past kick off then mark as finished
+            self.df['marketStartTime'] = pd.to_datetime(self.df['marketStartTime'])
+            if datetime.now(timezone.utc) - self.df.loc[idx, 'marketStartTime'] > timedelta(hours=4):
+                self.df.loc[idx, 'ft_score'] = self.df.loc[idx, 'score']
+                self.df.loc[idx, 'inplay_state'] = 'Finished'
+                self.check_paper_bet_result(idx)
 
-        # If match finished check if traded. If traded then update trading log. Archive all and remove from trading log
-        # database if un-traded.
-        if self.df.loc[idx, 'inplay_state'] == 'Finished':
-            self.df.loc[idx, 'ft_score'] = self.df.loc[idx, 'score']
-            self.check_paper_bet_result(idx)
-            self.check_cleared_orders_pnl(idx=idx)
-            self.archive_autotrader_match(idx)
-            self.remove_finished_matches_autotrader(idx)
-            return True
-        return False
+            # If match finished check if traded. If traded then update trading log. Archive all and remove from trading log
+            # database if un-traded.
+            if self.df.loc[idx, 'inplay_state'] == 'Finished':
+                self.df.loc[idx, 'ft_score'] = self.df.loc[idx, 'score']
+                self.check_paper_bet_result(idx)
+                self.check_cleared_orders_pnl(idx=idx)
+                self.archive_autotrader_match(idx)
+                self.remove_finished_matches_autotrader(idx)
+                return True
+            return False
+        except betfairlightweight.exceptions.StatusCodeError:
+            print('GetScores Status code error')
+            logging.exception('STATUS CODE ERROR')
+            
     
     def check_market_state(self, idx):
         """
@@ -624,7 +629,7 @@ class AutoTrader:
                     logging.exception()
         except betfairlightweight.exceptions.StatusCodeError:
             print('GetScores Status code error')
-            logging.exception()
+            logging.exception('STATUS CODE ERROR')
 
     def check_lay_price(self, idx):
         """
