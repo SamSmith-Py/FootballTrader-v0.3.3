@@ -339,7 +339,7 @@ class AutoTrader:
         self.col_dtypes = {}   
         self.max_lay_the_draw_price = 5
         self.ltd_paper_stake_size = 100
-        self.ltd_live_stake_size = 2
+        self.ltd_live_stake_size = 3
 
         # Time required to wait for next run_autotrader run through
         self.wait_time = 10  # Seconds
@@ -492,10 +492,10 @@ class AutoTrader:
             # TESTING
             if len(self.df.loc[self.df['live/paper'] == 'live']) > 0:
                 print(self.df.loc[self.df['live/paper'] == 'live', ['event_name', 'League', 'live/paper', 'strategy', 'marketStartTime', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
-                           'score', 'entry_ordered', 'GP Avg', 'Form H v A', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
+                           'score', 'entry_ordered', 'entry_amount_matched', 'GP Avg', 'Form H v A', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
             else: 
                  print(self.df[['event_name', 'League', 'live/paper', 'strategy', 'marketStartTime', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
-                           'score', 'entry_ordered', 'GP Avg', 'Form H v A', 'Form Goal Edge']].sort_values(by=['start_date', 'start_time']))
+                           'score', 'entry_ordered', 'entry_amount_matched', 'GP Avg', 'Form H v A', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
 
             self.continuos_match_finder(activate=continuous)
 
@@ -1423,8 +1423,8 @@ class BackTester_v2:
 
         def optimise_strategy(train_data):
             # Set strategy criteria to be optimised 
-            hva = [-5, -6, -7, -8, -9, -10, -11, -12]
-            goal_edge = [-3, -4, -5]
+            hva = [0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11]
+            goal_edge = [-1, -2, -3, -4, -5, -6, -7]
             gp = [0, 8]
             
             # Create list of combination lists

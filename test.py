@@ -130,4 +130,20 @@ def open_db_get_results():
     print(df['entry_price_avg'].to_list())
 
 
-open_db_get_results()
+def view_settled_live_bets():
+    autotrader_db_path = r'C:\Users\Sam\FootballTrader v0.3.2\database\autotrader_data.db'
+    cnx = sqlite3.connect(autotrader_db_path, check_same_thread=False)
+
+    df = pd.read_sql_query("SELECT * from archive_v2", cnx) 
+
+    # df = df.loc[df['live/paper'] == 'live']
+    df['marketStartTime'] = pd.to_datetime(df['marketStartTime'])
+    df = df.loc[df['marketStartTime'] > '2025-07-07 17:00:00+00:00'] 
+    print(df.columns)
+
+    print(df[['score', 'ht_score', 'ft_score', 'goals_15', 'goals_30',
+       'goals_45', 'goals_60', 'goals_75', 'goals_90']])
+    df['marketStartTime'] = df['marketStartTime'].astype(str)
+    df.to_excel('settled_live_bets.xlsx')
+
+view_settled_live_bets()
