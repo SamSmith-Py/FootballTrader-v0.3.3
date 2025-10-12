@@ -390,8 +390,8 @@ class AutoTrader:
 
         # Get list of leagues that are eligible to assign. These leagues are filtered first from the league strike rate and then from the optimised league performance results, then filtered again to get leagues with more than 75% strike rate.
         # This leaves only leagues that have a track record of low drawing matches and proven to work with the current strategy criteria.
-        leagues = pd.read_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Q1 + 2 2025\Optimised_Strategy_Results\optimised_LTD_league_performance.html', index_col=0)[0]
-        leagues = leagues.loc[leagues['win_rate']>=75, 'League'].to_list()
+        leagues = pd.read_html(r'C:\Users\Sam\FootballTrader v0.3.2\backtest\strategy\LTD\Q3 2025\Optimised_Strategy_Results\optimised_LTD_league_performance.html', index_col=0)[0]
+        leagues = leagues.loc[leagues['win_rate']>=70, 'League'].to_list()
 
         # Get LTD strategy criteria
         df_LTD_strat = pd.read_sql_query("SELECT * from LTD_strategy_criteria", self.cnx, dtype=self.col_dtypes)
@@ -491,11 +491,11 @@ class AutoTrader:
 
             # TESTING
             if len(self.df.loc[self.df['live/paper'] == 'live']) > 0:
-                print(self.df.loc[self.df['live/paper'] == 'live', ['event_name', 'League', 'live/paper', 'strategy', 'marketStartTime', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
-                           'score', 'entry_ordered', 'entry_amount_matched', 'GP Avg', 'Form H v A', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
+                print(self.df.loc[self.df['live/paper'] == 'live', ['event_name', 'League', 'live/paper', 'strategy', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
+                           'score', 'entry_ordered', 'entry_amount_matched', 'GP Avg', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
             else: 
-                 print(self.df[['event_name', 'League', 'live/paper', 'strategy', 'marketStartTime', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
-                           'score', 'entry_ordered', 'entry_amount_matched', 'GP Avg', 'Form H v A', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
+                 print(self.df[['event_name', 'League', 'live/paper', 'strategy', 'start_date', 'start_time', 'inplay_state', 'time_elapsed', 'market_state',
+                           'score', 'entry_ordered', 'entry_amount_matched', 'GP Avg', 'Form Goal Edge', 'favourite']].sort_values(by=['start_date', 'start_time']))
 
             self.continuos_match_finder(activate=continuous)
 
@@ -1424,7 +1424,7 @@ class BackTester_v2:
         def optimise_strategy(train_data):
             # Set strategy criteria to be optimised 
             hva = [0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11]
-            goal_edge = [-1, -2, -3, -4, -5, -6, -7]
+            goal_edge = [-1, -2, -3, -4, -5, -6, -7, -8, -9]
             gp = [0, 8]
             
             # Create list of combination lists
