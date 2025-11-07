@@ -1,0 +1,1416 @@
+league,match_seq,cum_pnl
+"Belgium, Challenger Pro League",1,100.0
+"Belgium, Challenger Pro League",2,-129.99999999999997
+"Belgium, Challenger Pro League",3,-29.99999999999997
+"Belgium, Challenger Pro League",4,-290.0
+"Belgium, Challenger Pro League",5,-190.0
+"Belgium, Challenger Pro League",6,-90.0
+"Belgium, Challenger Pro League",7,-315.0
+"Belgium, Challenger Pro League",8,-215.0
+"Belgium, Challenger Pro League",9,-115.0
+"Belgium, Challenger Pro League",10,-340.0
+"Belgium, Challenger Pro League",11,-240.0
+"Belgium, Challenger Pro League",12,-140.0
+"Belgium, Challenger Pro League",13,-40.0
+"Belgium, Challenger Pro League",14,60.0
+"Belgium, Challenger Pro League",15,-215.0
+"Belgium, Challenger Pro League",16,-115.0
+"Belgium, Challenger Pro League",17,-375.0
+"Belgium, Challenger Pro League",18,-275.0
+"Belgium, Challenger Pro League",19,-175.0
+"Bolivia, Primera División",1,100.0
+"Bolivia, Primera División",2,-129.99999999999997
+"Bolivia, Primera División",3,-29.99999999999997
+"Bolivia, Primera División",4,70.00000000000003
+"Bolivia, Primera División",5,170.00000000000003
+"Bolivia, Primera División",6,270.0
+"Bolivia, Primera División",7,370.0
+"Bolivia, Primera División",8,470.0
+"Bolivia, Primera División",9,570.0
+"Bolivia, Primera División",10,670.0
+"Bolivia, Primera División",11,770.0
+"Bolivia, Primera División",12,870.0
+"Bolivia, Primera División",13,970.0
+"Bolivia, Primera División",14,1070.0
+"Bolivia, Primera División",15,1170.0
+"Bolivia, Primera División",16,1270.0
+"Bolivia, Primera División",17,1370.0
+"Bolivia, Primera División",18,1470.0
+"Bolivia, Primera División",19,1570.0
+"Bolivia, Primera División",20,1670.0
+"Bolivia, Primera División",21,1770.0
+"Bolivia, Primera División",22,1870.0
+"Bolivia, Primera División",23,1970.0
+"Bolivia, Primera División",24,2070.0
+"Bolivia, Primera División",25,2170.0
+"Bolivia, Primera División",26,2270.0
+"Bolivia, Primera División",27,2370.0
+"Bolivia, Primera División",28,2470.0
+"Bolivia, Primera División",29,2570.0
+"Bolivia, Primera División",30,2670.0
+"Bolivia, Primera División",31,2440.0
+"Bolivia, Primera División",32,2540.0
+"Brazil, Serie A",1,100.0
+"Brazil, Serie A",2,200.0
+"Brazil, Serie A",3,300.0
+"Brazil, Serie A",4,400.0
+"Brazil, Serie A",5,500.0
+"Brazil, Serie A",6,300.0
+"Brazil, Serie A",7,400.0
+"Brazil, Serie A",8,500.0
+"Brazil, Serie A",9,280.0
+"Brazil, Serie A",10,380.0
+"Brazil, Serie A",11,480.0
+"Brazil, Serie A",12,580.0
+"Brazil, Serie A",13,680.0
+"Brazil, Serie A",14,780.0
+"Brazil, Serie A",15,880.0
+"Brazil, Serie A",16,690.0
+"Brazil, Serie A",17,790.0
+"Brazil, Serie A",18,890.0
+"Brazil, Serie A",19,990.0
+"Brazil, Serie A",20,720.0
+"Brazil, Serie A",21,510.0
+"Brazil, Serie A",22,610.0
+"Brazil, Serie A",23,710.0
+"Brazil, Serie A",24,440.0
+"Brazil, Serie A",25,230.0
+"Brazil, Serie A",26,330.0
+"Brazil, Serie A",27,430.0
+"Brazil, Serie A",28,530.0
+"Brazil, Serie A",29,630.0
+"Brazil, Serie A",30,730.0
+"Brazil, Serie A",31,460.0
+"Brazil, Serie A",32,270.0
+"Brazil, Serie A",33,370.0
+"Brazil, Serie A",34,470.0
+"Brazil, Serie A",35,570.0
+"Brazil, Serie A",36,670.0
+"Brazil, Serie A",37,480.0
+"Brazil, Serie A",38,580.0
+"Brazil, Serie A",39,680.0
+"Brazil, Serie A",40,780.0
+"Brazil, Serie A",41,880.0
+"Brazil, Serie A",42,980.0
+"Brazil, Serie A",43,1080.0
+"Brazil, Serie A",44,1180.0
+"Brazil, Serie A",45,1280.0
+"Brazil, Serie A",46,1380.0
+"Brazil, Serie A",47,1480.0
+"Brazil, Serie A",48,1580.0
+"Brazil, Serie A",49,1680.0
+"Brazil, Serie A",50,1780.0
+"Brazil, Serie A",51,1880.0
+"Brazil, Serie A",52,1980.0
+"Brazil, Serie A",53,1770.0
+"Brazil, Serie A",54,1870.0
+"Brazil, Serie A",55,1670.0
+"Brazil, Serie A",56,1770.0
+"Brazil, Serie A",57,1870.0
+"Brazil, Serie A",58,1630.0
+"Brazil, Serie A",59,1390.0
+"Brazil, Serie A",60,1490.0
+"Brazil, Serie A",61,1590.0
+"Brazil, Serie A",62,1690.0
+"Brazil, Serie A",63,1790.0
+"Brazil, Serie A",64,1890.0
+"Brazil, Serie A",65,1690.0
+"Brazil, Serie A",66,1790.0
+"Brazil, Serie A",67,1890.0
+"Brazil, Serie A",68,1660.0
+"Brazil, Serie A",69,1760.0
+"Brazil, Serie A",70,1860.0
+"Brazil, Serie A",71,1960.0
+"Brazil, Serie A",72,2060.0
+"Brazil, Serie A",73,1840.0
+"Brazil, Serie A",74,1940.0
+"Brazil, Serie A",75,1700.0
+"Brazil, Serie A",76,1500.0
+"Brazil, Serie A",77,1280.0
+"Brazil, Serie A",78,1380.0
+"Brazil, Serie A",79,1155.0
+"Brazil, Serie A",80,1255.0
+"Brazil, Serie A",81,975.0
+"Brazil, Serie A",82,1075.0
+"Brazil, Serie A",83,1175.0
+"Brazil, Serie A",84,1275.0
+"Brazil, Serie A",85,1375.0
+"Brazil, Serie A",86,1475.0
+"Brazil, Serie A",87,1575.0
+"Brazil, Serie A",88,1675.0
+"Brazil, Serie A",89,1775.0
+"Brazil, Serie A",90,1875.0
+"Brazil, Serie A",91,1975.0
+"Brazil, Serie A",92,2075.0
+"Brazil, Serie A",93,2175.0
+"Brazil, Serie A",94,1975.0
+"Brazil, Serie A",95,2075.0
+"Brazil, Serie A",96,2175.0
+"Brazil, Serie A",97,2275.0
+"Chile, Primera División",1,100.0
+"Chile, Primera División",2,-110.0
+"Chile, Primera División",3,-10.0
+"Chile, Primera División",4,90.0
+"Chile, Primera División",5,-139.99999999999997
+"Chile, Primera División",6,-39.99999999999997
+"Chile, Primera División",7,60.00000000000003
+"Chile, Primera División",8,160.00000000000003
+"Chile, Primera División",9,260.0
+"Chile, Primera División",10,50.0
+"Chile, Primera División",11,150.0
+"Chile, Primera División",12,250.0
+"Chile, Primera División",13,350.0
+"Chile, Primera División",14,450.0
+"Chile, Primera División",15,229.99999999999997
+"Chile, Primera División",16,330.0
+"Chile, Primera División",17,430.0
+"Chile, Primera División",18,220.0
+"Chile, Primera División",19,320.0
+"Chile, Primera División",20,420.0
+"Chile, Primera División",21,210.0
+"Chile, Primera División",22,310.0
+"Chile, Primera División",23,410.0
+"Chile, Primera División",24,160.0
+"Chile, Primera División",25,260.0
+"Chile, Primera División",26,360.0
+"Chile, Primera División",27,460.0
+"Chile, Primera División",28,560.0
+"Chile, Primera División",29,360.0
+"Chile, Primera División",30,460.0
+"Chile, Primera División",31,560.0
+"Chile, Primera División",32,660.0
+"Chile, Primera División",33,760.0
+"Chile, Primera División",34,860.0
+"Chile, Primera División",35,960.0
+"Chile, Primera División",36,1060.0
+"Chile, Primera División",37,1160.0
+"Chile, Primera División",38,1260.0
+"Chile, Primera División",39,1360.0
+"Chile, Primera División",40,1460.0
+"Chile, Primera División",41,1560.0
+"Chile, Primera División",42,1310.0
+"Chile, Primera División",43,1120.0
+"Chile, Segunda División",1,100.0
+"Chile, Segunda División",2,200.0
+"Chile, Segunda División",3,-10.0
+"Chile, Segunda División",4,-270.0
+"Chile, Segunda División",5,-170.0
+"Chile, Segunda División",6,-430.0
+"Chile, Segunda División",7,-330.0
+"Chile, Segunda División",8,-230.0
+"Chile, Segunda División",9,-130.0
+"Chile, Segunda División",10,-30.0
+"Chile, Segunda División",11,70.0
+"Croatia, HNL",1,100.0
+"Croatia, HNL",2,200.0
+"Croatia, HNL",3,300.0
+"Croatia, HNL",4,60.0
+"Croatia, HNL",5,160.0
+"Croatia, HNL",6,260.0
+"Croatia, HNL",7,360.0
+"Croatia, HNL",8,160.0
+"Croatia, HNL",9,260.0
+"Croatia, HNL",10,360.0
+"Croatia, HNL",11,460.0
+"Croatia, HNL",12,230.00000000000003
+"Croatia, HNL",13,330.0
+"Croatia, HNL",14,430.0
+"Croatia, HNL",15,530.0
+"Croatia, HNL",16,630.0
+"Croatia, HNL",17,730.0
+"Croatia, HNL",18,500.0
+"Cyprus, 1. Division",1,100.0
+"Cyprus, 1. Division",2,200.0
+"Cyprus, 1. Division",3,300.0
+"Cyprus, 1. Division",4,400.0
+"Cyprus, 1. Division",5,500.0
+"Cyprus, 1. Division",6,600.0
+"Denmark, Superliga",1,100.0
+"Denmark, Superliga",2,200.0
+"Denmark, Superliga",3,-50.0
+"Denmark, Superliga",4,50.0
+"Denmark, Superliga",5,150.0
+"Denmark, Superliga",6,250.0
+"Denmark, Superliga",7,350.0
+"Denmark, Superliga",8,450.0
+"Denmark, Superliga",9,550.0
+"Denmark, Superliga",10,650.0
+"Denmark, Superliga",11,750.0
+"Denmark, Superliga",12,850.0
+"Denmark, Superliga",13,950.0
+"Denmark, Superliga",14,1050.0
+"Denmark, Superliga",15,1150.0
+"Denmark, Superliga",16,1250.0
+"Denmark, Superliga",17,1350.0
+"Denmark, Superliga",18,1450.0
+"Denmark, Superliga",19,1550.0
+"Denmark, Superliga",20,1650.0
+"Denmark, Superliga",21,1750.0
+"Denmark, Superliga",22,1850.0
+"Denmark, Superliga",23,1950.0
+"Denmark, Superliga",24,2050.0
+"Denmark, Superliga",25,2150.0
+"Denmark, Superliga",26,1920.0
+"Denmark, Superliga",27,1660.0
+"Denmark, Superliga",28,1760.0
+"Denmark, Superliga",29,1860.0
+"Denmark, Superliga",30,1960.0
+"Ecuador, Liga Pro Serie B",1,100.0
+"Ecuador, Liga Pro Serie B",2,-125.0
+"Ecuador, Liga Pro Serie B",3,-25.0
+"Ecuador, Liga Pro Serie B",4,75.0
+"Ecuador, Liga Pro Serie B",5,175.0
+"Ecuador, Liga Pro Serie B",6,275.0
+"Ecuador, Liga Pro Serie B",7,375.0
+"Ecuador, Liga Pro Serie B",8,475.0
+"England, FA WSL",1,100.0
+"England, FA WSL",2,-170.0
+"England, FA WSL",3,-70.0
+"England, FA WSL",4,30.0
+"England, FA WSL",5,130.0
+"England, FA WSL",6,230.0
+"England, FA WSL",7,330.0
+"England, FA WSL",8,430.0
+"England, FA WSL",9,205.0
+"England, FA WSL",10,305.0
+"England, FA WSL",11,405.0
+"England, FA WSL",12,505.0
+"England, League One",1,100.0
+"England, League One",2,-140.0
+"England, League One",3,-40.0
+"England, League One",4,60.0
+"England, League One",5,160.0
+"England, League One",6,260.0
+"England, League One",7,360.0
+"England, League One",8,139.99999999999997
+"England, League One",9,239.99999999999997
+"England, League One",10,340.0
+"England, League One",11,440.0
+"England, League One",12,540.0
+"England, League One",13,330.0
+"England, League One",14,430.0
+"England, League One",15,200.00000000000003
+"England, League One",16,-49.99999999999997
+"England, League One",17,50.00000000000003
+"England, League One",18,150.00000000000003
+"England, League One",19,250.00000000000003
+"England, League One",20,350.0
+"England, League One",21,450.0
+"England, League One",22,550.0
+"England, League One",23,650.0
+"England, League One",24,750.0
+"England, League One",25,850.0
+"England, League One",26,625.0
+"England, League One",27,725.0
+"England, League One",28,825.0
+"England, League One",29,595.0
+"England, League One",30,695.0
+"England, League One",31,795.0
+"England, League One",32,895.0
+"England, League One",33,620.0
+"England, League One",34,720.0
+"England, League One",35,820.0
+"England, League One",36,920.0
+"England, League One",37,1020.0
+"England, League One",38,750.0
+"England, League One",39,850.0
+"England, League One",40,950.0
+"England, League One",41,1050.0
+"England, League One",42,1150.0
+"England, League One",43,1250.0
+"England, League One",44,1350.0
+"England, League One",45,1450.0
+"England, League One",46,1210.0
+"England, League One",47,1310.0
+"England, League One",48,1070.0
+"England, League One",49,1170.0
+"England, League One",50,960.0
+"England, League One",51,1060.0
+"England, League One",52,1160.0
+"England, League One",53,1260.0
+"England, League One",54,1360.0
+"England, League One",55,1460.0
+"England, League One",56,1560.0
+"England, League One",57,1660.0
+"England, League One",58,1760.0
+"England, League One",59,1860.0
+"England, League One",60,1960.0
+"England, League One",61,1660.0
+"England, League One",62,1760.0
+"England, League One",63,1860.0
+"England, League One",64,1960.0
+"England, League One",65,2060.0
+"England, League One",66,2160.0
+"England, League One",67,2260.0
+"England, League One",68,2360.0
+"England, League One",69,2460.0
+"England, League One",70,2180.0
+"England, League One",71,2280.0
+"England, League One",72,2380.0
+"England, League One",73,2130.0
+"England, League One",74,1850.0
+"England, League One",75,1570.0
+"England, League One",76,1330.0
+"England, League One",77,1100.0
+"England, League One",78,1200.0
+"England, League One",79,1300.0
+"England, League One",80,1400.0
+"England, League One",81,1500.0
+"England, League One",82,1600.0
+"England, League One",83,1370.0
+"England, League One",84,1470.0
+"England, League One",85,1570.0
+"England, League One",86,1670.0
+"England, League One",87,1770.0
+"England, League One",88,1870.0
+"England, League One",89,1670.0
+"England, League One",90,1440.0
+"England, League One",91,1540.0
+"England, League One",92,1640.0
+"England, League One",93,1740.0
+"England, League One",94,1530.0
+"England, League Two",1,100.0
+"England, League Two",2,200.0
+"England, League Two",3,300.0
+"England, League Two",4,400.0
+"England, League Two",5,170.00000000000003
+"England, League Two",6,-89.99999999999997
+"England, League Two",7,10.000000000000028
+"England, League Two",8,110.00000000000003
+"England, League Two",9,-99.99999999999997
+"England, League Two",10,-320.0
+"England, League Two",11,-220.0
+"England, League Two",12,-120.0
+"England, League Two",13,-20.0
+"England, League Two",14,80.0
+"England, League Two",15,180.0
+"England, League Two",16,280.0
+"England, League Two",17,50.00000000000003
+"England, League Two",18,-239.99999999999997
+"England, League Two",19,-139.99999999999997
+"England, League Two",20,-39.99999999999997
+"England, League Two",21,60.00000000000003
+"England, League Two",22,160.00000000000003
+"England, League Two",23,260.0
+"England, League Two",24,360.0
+"England, League Two",25,460.0
+"England, League Two",26,560.0
+"England, League Two",27,340.0
+"England, League Two",28,440.0
+"England, League Two",29,540.0
+"England, League Two",30,320.0
+"England, League Two",31,420.0
+"England, League Two",32,520.0
+"England, League Two",33,290.0
+"England, League Two",34,40.0
+"England, League Two",35,140.0
+"England, League Two",36,-140.0
+"England, League Two",37,-40.0
+"England, League Two",38,60.0
+"England, League Two",39,160.0
+"England, League Two",40,260.0
+"England, League Two",41,20.0
+"England, League Two",42,120.0
+"England, League Two",43,220.0
+"England, League Two",44,320.0
+"England, League Two",45,99.99999999999997
+"England, League Two",46,199.99999999999997
+"England, League Two",47,300.0
+"England, League Two",48,400.0
+"England, League Two",49,500.0
+"England, League Two",50,600.0
+"England, League Two",51,700.0
+"England, League Two",52,800.0
+"England, League Two",53,900.0
+"England, League Two",54,1000.0
+"England, League Two",55,1100.0
+"England, League Two",56,1200.0
+"England, League Two",57,990.0
+"England, League Two",58,1090.0
+"England, League Two",59,1190.0
+"England, League Two",60,1290.0
+"England, League Two",61,1390.0
+"England, League Two",62,1490.0
+"England, League Two",63,1590.0
+"England, League Two",64,1690.0
+"England, League Two",65,1440.0
+"England, League Two",66,1540.0
+"England, League Two",67,1640.0
+"England, League Two",68,1740.0
+"England, League Two",69,1840.0
+"England, League Two",70,1940.0
+"England, League Two",71,2040.0
+"England, League Two",72,1820.0
+"England, League Two",73,1920.0
+"England, League Two",74,2020.0
+"England, League Two",75,1740.0
+"England, League Two",76,1840.0
+"England, League Two",77,1940.0
+"England, League Two",78,2040.0
+"England, League Two",79,2140.0
+"England, League Two",80,2240.0
+"England, League Two",81,2340.0
+"England, League Two",82,2100.0
+"England, League Two",83,2200.0
+"England, League Two",84,1960.0
+"England, League Two",85,1710.0
+"England, League Two",86,1460.0
+"England, League Two",87,1560.0
+"England, National League - North",1,-229.99999999999997
+"England, National League - North",2,-129.99999999999997
+"England, National League - North",3,-29.99999999999997
+"England, National League - North",4,70.00000000000003
+"England, National League - North",5,170.00000000000003
+"England, National League - North",6,270.0
+"England, National League - North",7,370.0
+"England, National League - North",8,145.0
+"England, National League - North",9,245.0
+"England, National League - North",10,345.0
+"England, National League - North",11,445.0
+"England, National League - North",12,545.0
+"England, National League - North",13,295.0
+"England, National League - North",14,395.0
+"England, National League - North",15,495.0
+"England, National League - North",16,595.0
+"England, National League - North",17,695.0
+"England, National League - North",18,470.0
+"England, National League - North",19,570.0
+"England, National League - North",20,340.0
+"England, National League - North",21,80.0
+"England, National League - North",22,-180.0
+"England, National League - North",23,-80.0
+"England, National League - North",24,20.0
+"England, National League - North",25,120.0
+"England, National League - North",26,220.0
+"England, National League - North",27,320.0
+"England, National League - North",28,420.0
+"England, National League - North",29,520.0
+"England, National League - North",30,620.0
+"England, National League - North",31,720.0
+"England, National League - North",32,490.0
+"England, National League - North",33,590.0
+"England, National League - North",34,690.0
+"England, National League - North",35,450.0
+"England, National League - North",36,550.0
+"England, National League - North",37,650.0
+"England, National League - North",38,750.0
+"England, National League - North",39,850.0
+"England, National League - North",40,950.0
+"England, National League - North",41,1050.0
+"England, National League - North",42,1150.0
+"England, National League - North",43,900.0
+"England, National League - North",44,1000.0
+"England, National League - North",45,1100.0
+"England, National League - North",46,1200.0
+"England, National League - North",47,1300.0
+"England, National League - North",48,1400.0
+"England, National League - North",49,1170.0
+"England, National League - North",50,870.0
+"England, National League - North",51,970.0
+"England, National League - North",52,1070.0
+"England, National League - North",53,840.0
+"England, National League - North",54,940.0
+"England, National League - North",55,1040.0
+"England, National League - North",56,1140.0
+"England, National League - North",57,1240.0
+"England, National League - North",58,1340.0
+"England, National League - North",59,1130.0
+"England, National League - North",60,905.0
+"England, National League - North",61,1005.0
+"England, National League - North",62,775.0
+"England, National League - North",63,875.0
+"England, National League - North",64,645.0
+"England, National League - North",65,745.0
+"England, National League - North",66,845.0
+"England, National League - North",67,945.0
+"England, National League - North",68,1045.0
+"England, National League - North",69,770.0
+"England, National League - North",70,870.0
+"England, National League - North",71,970.0
+"England, National League - North",72,680.0
+"England, National League - North",73,780.0
+"England, National League - North",74,540.0
+"England, National League - North",75,640.0
+"England, National League - North",76,740.0
+"England, National League - North",77,440.0
+"England, National League - North",78,540.0
+"England, National League - North",79,640.0
+"England, National League - North",80,740.0
+"England, National League - North",81,840.0
+"England, National League - North",82,940.0
+"England, National League - North",83,1040.0
+"England, National League - North",84,1140.0
+"England, National League - North",85,1240.0
+"England, National League - North",86,1340.0
+"England, National League - North",87,1440.0
+"England, National League - North",88,1540.0
+"England, National League - North",89,1640.0
+"England, National League - North",90,1410.0
+"England, National League - North",91,1510.0
+"England, National League - North",92,1610.0
+"England, National League - North",93,1385.0
+"England, National League - North",94,1485.0
+"England, National League - North",95,1260.0
+"England, National League - North",96,1360.0
+"England, National League - North",97,1460.0
+"England, National League - North",98,1560.0
+"England, Premier League 2 Division One",1,100.0
+"England, Premier League 2 Division One",2,200.0
+"England, Premier League 2 Division One",3,-100.0
+"England, Premier League 2 Division One",4,0.0
+"England, Premier League 2 Division One",5,100.0
+"England, Premier League 2 Division One",6,200.0
+"England, Premier League 2 Division One",7,300.0
+"England, Premier League 2 Division One",8,400.0
+"England, Premier League 2 Division One",9,500.0
+"England, Premier League 2 Division One",10,600.0
+"England, Premier League 2 Division One",11,320.0
+"England, Premier League 2 Division One",12,30.0
+"England, Premier League 2 Division One",13,130.0
+"England, Premier League 2 Division One",14,230.0
+"England, Premier League 2 Division One",15,330.0
+"England, Premier League 2 Division One",16,430.0
+"England, Premier League 2 Division One",17,530.0
+"England, Premier League 2 Division One",18,630.0
+"England, Premier League 2 Division One",19,350.0
+"England, Premier League 2 Division One",20,70.0
+"England, Premier League 2 Division One",21,-230.0
+"England, Premier League 2 Division One",22,-130.0
+"England, Premier League 2 Division One",23,-30.0
+"Estonia, Meistriliiga",1,100.0
+"Estonia, Meistriliiga",2,-129.99999999999997
+"Estonia, Meistriliiga",3,-29.99999999999997
+"Estonia, Meistriliiga",4,70.00000000000003
+"Estonia, Meistriliiga",5,170.00000000000003
+"Estonia, Meistriliiga",6,270.0
+"Estonia, Meistriliiga",7,370.0
+"Estonia, Meistriliiga",8,470.0
+"Estonia, Meistriliiga",9,180.0
+"Estonia, Meistriliiga",10,280.0
+"France, Ligue 1",1,100.0
+"France, Ligue 1",2,200.0
+"France, Ligue 1",3,300.0
+"France, Ligue 1",4,400.0
+"France, Ligue 1",5,500.0
+"France, Ligue 1",6,600.0
+"France, Ligue 1",7,700.0
+"France, Ligue 1",8,800.0
+"France, Ligue 1",9,900.0
+"France, Ligue 1",10,1000.0
+"France, Ligue 1",11,1100.0
+"France, Ligue 1",12,1200.0
+"France, Ligue 1",13,960.0
+"France, Ligue 1",14,1060.0
+"France, Ligue 1",15,1160.0
+"France, Ligue 1",16,1260.0
+"France, Ligue 1",17,1360.0
+"France, Ligue 1",18,1460.0
+"France, Ligue 1",19,1240.0
+"France, Ligue 1",20,1340.0
+"France, Ligue 1",21,1440.0
+"France, Ligue 1",22,1200.0
+"France, Ligue 1",23,920.0
+"France, Ligue 1",24,690.0
+"France, Ligue 1",25,790.0
+"France, Ligue 1",26,540.0
+"France, Ligue 1",27,640.0
+"France, Ligue 1",28,740.0
+"France, Ligue 1",29,840.0
+"France, Ligue 1",30,560.0
+"Germany, 2. Bundesliga",1,100.0
+"Germany, 2. Bundesliga",2,200.0
+"Germany, 2. Bundesliga",3,300.0
+"Germany, 2. Bundesliga",4,400.0
+"Germany, 2. Bundesliga",5,500.0
+"Germany, 2. Bundesliga",6,260.0
+"Germany, 2. Bundesliga",7,360.0
+"Germany, 2. Bundesliga",8,460.0
+"Germany, 2. Bundesliga",9,560.0
+"Germany, 2. Bundesliga",10,660.0
+"Germany, 2. Bundesliga",11,760.0
+"Germany, 2. Bundesliga",12,860.0
+"Germany, 2. Bundesliga",13,960.0
+"Germany, 2. Bundesliga",14,1060.0
+"Germany, 2. Bundesliga",15,1160.0
+"Germany, 2. Bundesliga",16,920.0
+"Germany, 2. Bundesliga",17,670.0
+"Germany, 2. Bundesliga",18,770.0
+"Germany, 2. Bundesliga",19,870.0
+"Germany, 2. Bundesliga",20,970.0
+"Germany, 2. Bundesliga",21,1070.0
+"Germany, 2. Bundesliga",22,1170.0
+"Germany, 2. Bundesliga",23,1270.0
+"Germany, 2. Bundesliga",24,1010.0
+"Germany, 2. Bundesliga",25,1110.0
+"Germany, 2. Bundesliga",26,1210.0
+"Germany, 2. Bundesliga",27,1310.0
+"Germany, 2. Bundesliga",28,1410.0
+"Germany, 2. Bundesliga",29,1510.0
+"Germany, 2. Bundesliga",30,1610.0
+"Germany, 2. Bundesliga",31,1370.0
+"Germany, 2. Bundesliga",32,1470.0
+"Germany, 2. Bundesliga",33,1570.0
+"Germany, 2. Bundesliga",34,1310.0
+"Germany, 2. Bundesliga",35,1410.0
+"Germany, 2. Bundesliga",36,1140.0
+"Germany, 2. Bundesliga",37,1240.0
+"Germany, 2. Bundesliga",38,1340.0
+"Germany, 2. Bundesliga",39,1060.0
+"Germany, 2. Bundesliga",40,1160.0
+"Germany, 2. Bundesliga",41,1260.0
+"Germany, 3. Liga",1,-229.99999999999997
+"Germany, 3. Liga",2,-455.0
+"Germany, 3. Liga",3,-355.0
+"Germany, 3. Liga",4,-645.0
+"Germany, 3. Liga",5,-545.0
+"Germany, 3. Liga",6,-445.0
+"Germany, 3. Liga",7,-345.0
+"Germany, 3. Liga",8,-245.0
+"Germany, 3. Liga",9,-145.0
+"Germany, 3. Liga",10,-45.0
+"Germany, 3. Liga",11,55.0
+"Germany, 3. Liga",12,155.0
+"Germany, 3. Liga",13,255.0
+"Germany, 3. Liga",14,355.0
+"Germany, 3. Liga",15,455.0
+"Germany, 3. Liga",16,255.0
+"Germany, 3. Liga",17,355.0
+"Germany, 3. Liga",18,455.0
+"Germany, 3. Liga",19,215.0
+"Germany, 3. Liga",20,315.0
+"Germany, 3. Liga",21,415.0
+"Germany, 3. Liga",22,515.0
+"Germany, 3. Liga",23,615.0
+"Germany, 3. Liga",24,715.0
+"Germany, 3. Liga",25,815.0
+"Germany, 3. Liga",26,915.0
+"Germany, 3. Liga",27,655.0
+"Germany, 3. Liga",28,445.0
+"Germany, 3. Liga",29,545.0
+"Germany, 3. Liga",30,315.0
+"Germany, 3. Liga",31,85.00000000000003
+"Germany, 3. Liga",32,185.00000000000003
+"Germany, 3. Liga",33,285.0
+"Germany, 3. Liga",34,15.0
+"Germany, 3. Liga",35,115.0
+"Germany, 3. Liga",36,-114.99999999999997
+"Germany, 3. Liga",37,-14.999999999999972
+"Germany, 3. Liga",38,-244.99999999999994
+"Germany, 3. Liga",39,-144.99999999999994
+"Germany, 3. Liga",40,-44.99999999999994
+"Germany, 3. Liga",41,55.00000000000006
+"Germany, 3. Liga",42,155.00000000000006
+"Germany, 3. Liga",43,255.00000000000006
+"Germany, 3. Liga",44,355.00000000000006
+"Germany, 3. Liga",45,455.00000000000006
+"Germany, Bundesliga",1,100.0
+"Germany, Bundesliga",2,200.0
+"Germany, Bundesliga",3,300.0
+"Germany, Bundesliga",4,400.0
+"Germany, Bundesliga",5,110.0
+"Germany, Bundesliga",6,210.0
+"Germany, Bundesliga",7,310.0
+"Germany, Bundesliga",8,410.0
+"Germany, Bundesliga",9,510.0
+"Germany, Bundesliga",10,610.0
+"Germany, Bundesliga",11,710.0
+"Germany, Bundesliga",12,810.0
+"Germany, Bundesliga",13,550.0
+"Germany, Bundesliga",14,650.0
+"Germany, Bundesliga",15,390.0
+"Germany, Bundesliga",16,490.0
+"Germany, Bundesliga",17,590.0
+"Germany, Bundesliga",18,690.0
+"Germany, Bundesliga",19,790.0
+"Germany, Bundesliga",20,550.0
+"Greece, Super League 1",1,100.0
+"Greece, Super League 1",2,200.0
+"Greece, Super League 1",3,300.0
+"Greece, Super League 1",4,400.0
+"Greece, Super League 1",5,500.0
+"Greece, Super League 1",6,600.0
+"Greece, Super League 1",7,700.0
+"Greece, Super League 1",8,410.0
+"Greece, Super League 1",9,510.0
+"Greece, Super League 1",10,610.0
+"Greece, Super League 1",11,330.0
+"Iceland, 1. Deild",1,100.0
+"Iceland, 1. Deild",2,200.0
+"Iceland, 1. Deild",3,300.0
+"Iceland, 1. Deild",4,400.0
+"Iceland, 1. Deild",5,500.0
+"Iceland, 1. Deild",6,600.0
+"Iceland, 1. Deild",7,340.0
+"Iceland, 1. Deild",8,440.0
+"Iceland, 1. Deild",9,540.0
+"Iceland, 1. Deild",10,250.0
+"Iceland, 1. Deild",11,350.0
+"Iceland, 1. Deild",12,450.0
+"Iceland, 1. Deild",13,550.0
+"Iceland, 1. Deild",14,650.0
+"Iceland, 1. Deild",15,750.0
+"Iceland, 1. Deild",16,850.0
+"Iceland, 1. Deild",17,950.0
+"Iceland, 1. Deild",18,1050.0
+"Iceland, 1. Deild",19,1150.0
+"Iceland, 1. Deild",20,1250.0
+"Iceland, 1. Deild",21,990.0
+"Iceland, 1. Deild",22,1090.0
+"Iceland, 1. Deild",23,1190.0
+"Iceland, 1. Deild",24,1290.0
+"Iceland, 1. Deild",25,1390.0
+"Iceland, 1. Deild",26,1110.0
+"Iceland, 1. Deild",27,835.0
+"Iceland, 1. Deild",28,935.0
+"Iceland, 1. Deild",29,1035.0
+"Indonesia, Liga 1",1,-240.0
+"Indonesia, Liga 1",2,-140.0
+"Indonesia, Liga 1",3,-40.0
+"Indonesia, Liga 1",4,60.0
+"Indonesia, Liga 1",5,160.0
+"Indonesia, Liga 1",6,-100.0
+"Indonesia, Liga 1",7,0.0
+"Indonesia, Liga 1",8,100.0
+"Indonesia, Liga 1",9,200.0
+"Indonesia, Liga 1",10,300.0
+"Indonesia, Liga 1",11,400.0
+"Indonesia, Liga 1",12,190.0
+"Indonesia, Liga 1",13,290.0
+"Indonesia, Liga 1",14,390.0
+"Indonesia, Liga 1",15,180.0
+"Indonesia, Liga 1",16,-70.0
+"Indonesia, Liga 1",17,30.0
+"Indonesia, Liga 1",18,130.0
+"Indonesia, Liga 1",19,230.0
+"Indonesia, Liga 1",20,330.0
+"Indonesia, Liga 1",21,430.0
+"Indonesia, Liga 1",22,530.0
+"Indonesia, Liga 1",23,310.0
+"Indonesia, Liga 1",24,410.0
+"Indonesia, Liga 1",25,510.0
+"Indonesia, Liga 1",26,285.0
+"Indonesia, Liga 1",27,75.0
+"Indonesia, Liga 1",28,175.0
+"Indonesia, Liga 1",29,275.0
+"Indonesia, Liga 1",30,375.0
+"Indonesia, Liga 1",31,175.0
+"Ireland, First Division",1,-270.0
+"Ireland, First Division",2,-170.0
+"Ireland, First Division",3,-70.0
+"Ireland, First Division",4,30.0
+"Ireland, First Division",5,130.0
+"Ireland, First Division",6,-140.0
+"Ireland, First Division",7,-380.0
+"Ireland, First Division",8,-280.0
+"Ireland, First Division",9,-180.0
+"Ireland, First Division",10,-80.0
+"Ireland, First Division",11,20.0
+"Ireland, First Division",12,-209.99999999999997
+"Ireland, First Division",13,-109.99999999999997
+"Ireland, First Division",14,-9.999999999999972
+"Ireland, First Division",15,90.00000000000003
+"Ireland, First Division",16,-159.99999999999997
+"Ireland, First Division",17,-59.99999999999997
+"Ireland, First Division",18,40.00000000000003
+"Ireland, First Division",19,140.00000000000003
+"Ireland, First Division",20,240.00000000000003
+"Ireland, First Division",21,340.0
+"Ireland, First Division",22,440.0
+"Ireland, First Division",23,540.0
+"Ireland, First Division",24,310.0
+"Ireland, First Division",25,60.0
+"Ireland, First Division",26,160.0
+"Ireland, First Division",27,-60.00000000000003
+"Ireland, First Division",28,39.99999999999997
+"Ireland, First Division",29,139.99999999999997
+"Ireland, First Division",30,239.99999999999997
+"Ireland, First Division",31,340.0
+"Ireland, First Division",32,440.0
+"Ireland, First Division",33,540.0
+"Ireland, First Division",34,640.0
+"Ireland, First Division",35,420.0
+"Japan, J3 League",1,-229.99999999999997
+"Japan, J3 League",2,-129.99999999999997
+"Japan, J3 League",3,-330.0
+"Japan, J3 League",4,-230.0
+"Japan, J3 League",5,-470.0
+"Japan, J3 League",6,-370.0
+"Japan, J3 League",7,-270.0
+"Japan, J3 League",8,-170.0
+"Japan, J3 League",9,-70.0
+"Japan, J3 League",10,-370.0
+"Japan, J3 League",11,-270.0
+"Japan, J3 League",12,-170.0
+"Japan, J3 League",13,-70.0
+"Japan, J3 League",14,-295.0
+"Japan, J3 League",15,-195.0
+"Japan, J3 League",16,-95.0
+"Japan, J3 League",17,5.0
+"Japan, J3 League",18,-220.0
+"Japan, J3 League",19,-120.0
+"Japan, J3 League",20,-20.0
+"Japan, J3 League",21,80.0
+"Japan, J3 League",22,180.0
+"Japan, J3 League",23,280.0
+"Japan, J3 League",24,380.0
+"Japan, J3 League",25,480.0
+"Japan, J3 League",26,580.0
+"Japan, J3 League",27,680.0
+"Japan, J3 League",28,405.0
+"Japan, J3 League",29,505.0
+"Japan, J3 League",30,305.0
+"Japan, J3 League",31,405.0
+"Japan, J3 League",32,505.0
+"Japan, J3 League",33,255.0
+"Japan, J3 League",34,355.0
+"Japan, J3 League",35,455.0
+"Japan, J3 League",36,555.0
+"Japan, J3 League",37,655.0
+"Japan, J3 League",38,755.0
+"Japan, J3 League",39,855.0
+"Japan, J3 League",40,955.0
+"Japan, J3 League",41,755.0
+"Japan, J3 League",42,855.0
+"Japan, J3 League",43,955.0
+"Japan, J3 League",44,705.0
+"Japan, J3 League",45,805.0
+"Japan, J3 League",46,605.0
+"Japan, J3 League",47,705.0
+"Japan, J3 League",48,805.0
+"Japan, J3 League",49,905.0
+"Japan, J3 League",50,680.0
+"Japan, J3 League",51,780.0
+"Japan, J3 League",52,880.0
+"Japan, J3 League",53,980.0
+"Japan, J3 League",54,1080.0
+"Japan, J3 League",55,1180.0
+"Japan, J3 League",56,1280.0
+"Japan, J3 League",57,1050.0
+"Japan, J3 League",58,1150.0
+"Japan, J3 League",59,1250.0
+"Japan, J3 League",60,1350.0
+"Japan, J3 League",61,1450.0
+"Japan, J3 League",62,1550.0
+"Japan, J3 League",63,1650.0
+"Japan, J3 League",64,1750.0
+"Japan, J3 League",65,1850.0
+"Japan, J3 League",66,1950.0
+"Japan, J3 League",67,2050.0
+"Japan, J3 League",68,1850.0
+"Japan, J3 League",69,1950.0
+"Japan, J3 League",70,2050.0
+"Japan, J3 League",71,2150.0
+"Japan, J3 League",72,2250.0
+"Japan, J3 League",73,2020.0
+"Japan, J3 League",74,2120.0
+"Japan, J3 League",75,2220.0
+"Japan, J3 League",76,2320.0
+"Japan, J3 League",77,2420.0
+"Japan, J3 League",78,2520.0
+"Japan, J3 League",79,2620.0
+"Japan, J3 League",80,2720.0
+"Jordan, League",1,100.0
+"Jordan, League",2,200.0
+"Jordan, League",3,-40.0
+"Jordan, League",4,-340.0
+"Jordan, League",5,-240.0
+"Jordan, League",6,-140.0
+"Jordan, League",7,-40.0
+"Jordan, League",8,60.0
+"Jordan, League",9,160.0
+"Jordan, League",10,260.0
+"Kazakhstan, Premier League",1,100.0
+"Kazakhstan, Premier League",2,200.0
+"Kazakhstan, Premier League",3,300.0
+"Kazakhstan, Premier League",4,400.0
+"Kazakhstan, Premier League",5,500.0
+"Kazakhstan, Premier League",6,290.0
+"Kazakhstan, Premier League",7,390.0
+"Kazakhstan, Premier League",8,490.0
+"Kazakhstan, Premier League",9,590.0
+"Kazakhstan, Premier League",10,410.0
+"Kazakhstan, Premier League",11,235.0
+"Kazakhstan, Premier League",12,335.0
+"Kazakhstan, Premier League",13,125.0
+"Lithuania, 1 Lyga",1,100.0
+"Lithuania, 1 Lyga",2,200.0
+"Lithuania, 1 Lyga",3,-100.0
+"Lithuania, 1 Lyga",4,0.0
+"Lithuania, 1 Lyga",5,100.0
+"Netherlands, Eerste Divisie",1,100.0
+"Netherlands, Eerste Divisie",2,-200.0
+"Netherlands, Eerste Divisie",3,-100.0
+"Netherlands, Eerste Divisie",4,0.0
+"Netherlands, Eerste Divisie",5,100.0
+"Netherlands, Eerste Divisie",6,200.0
+"Netherlands, Eerste Divisie",7,-80.0
+"Netherlands, Eerste Divisie",8,-350.0
+"Netherlands, Eerste Divisie",9,-250.0
+"Netherlands, Eerste Divisie",10,-150.0
+"Netherlands, Eerste Divisie",11,-50.0
+"Netherlands, Eerste Divisie",12,-320.0
+"Netherlands, Eerste Divisie",13,-220.0
+"Netherlands, Eerste Divisie",14,-120.0
+"Netherlands, Eerste Divisie",15,-20.0
+"Netherlands, Eerste Divisie",16,80.0
+"Netherlands, Eerste Divisie",17,180.0
+"Netherlands, Eerste Divisie",18,280.0
+"Netherlands, Eerste Divisie",19,30.0
+"Netherlands, Eerste Divisie",20,-230.0
+"Netherlands, Eerste Divisie",21,-130.0
+"Netherlands, Eerste Divisie",22,-30.0
+"Netherlands, Eerste Divisie",23,70.0
+"Netherlands, Eerste Divisie",24,170.0
+"Netherlands, Eerste Divisie",25,270.0
+"Netherlands, Eerste Divisie",26,370.0
+"Netherlands, Eerste Divisie",27,470.0
+"Netherlands, Eerste Divisie",28,570.0
+"Netherlands, Eredivisie",1,100.0
+"Netherlands, Eredivisie",2,200.0
+"Netherlands, Eredivisie",3,300.0
+"Netherlands, Eredivisie",4,0.0
+"Netherlands, Eredivisie",5,100.0
+"Netherlands, Eredivisie",6,200.0
+"Netherlands, Eredivisie",7,300.0
+"Netherlands, Eredivisie",8,30.0
+"Netherlands, Eredivisie",9,130.0
+"Netherlands, Eredivisie",10,-120.0
+"Netherlands, Eredivisie",11,-20.0
+"Netherlands, Eredivisie",12,80.0
+"Netherlands, Eredivisie",13,180.0
+"Netherlands, Eredivisie",14,280.0
+"Netherlands, Eredivisie",15,380.0
+"Netherlands, Eredivisie",16,480.0
+"Netherlands, Eredivisie",17,580.0
+"Netherlands, Eredivisie",18,680.0
+"Netherlands, Eredivisie",19,420.0
+"Netherlands, Eredivisie",20,520.0
+"Netherlands, Eredivisie",21,620.0
+"Netherlands, Eredivisie",22,720.0
+"Netherlands, Eredivisie",23,440.0
+"Netherlands, Eredivisie",24,540.0
+"Netherlands, Eredivisie",25,640.0
+"Netherlands, Eredivisie",26,740.0
+"Netherlands, Eredivisie",27,440.0
+"Netherlands, Eredivisie",28,540.0
+"Netherlands, Eredivisie",29,640.0
+"Netherlands, Eredivisie",30,360.0
+"Northern-Ireland, Premiership",1,100.0
+"Northern-Ireland, Premiership",2,200.0
+"Northern-Ireland, Premiership",3,0.0
+"Northern-Ireland, Premiership",4,100.0
+"Northern-Ireland, Premiership",5,200.0
+"Northern-Ireland, Premiership",6,300.0
+"Northern-Ireland, Premiership",7,400.0
+"Northern-Ireland, Premiership",8,500.0
+"Northern-Ireland, Premiership",9,600.0
+"Northern-Ireland, Premiership",10,700.0
+"Northern-Ireland, Premiership",11,800.0
+"Northern-Ireland, Premiership",12,900.0
+"Northern-Ireland, Premiership",13,690.0
+"Northern-Ireland, Premiership",14,790.0
+"Northern-Ireland, Premiership",15,890.0
+"Northern-Ireland, Premiership",16,990.0
+"Northern-Ireland, Premiership",17,1090.0
+"Northern-Ireland, Premiership",18,865.0
+"Northern-Ireland, Premiership",19,965.0
+"Northern-Ireland, Premiership",20,1065.0
+"Northern-Ireland, Premiership",21,1165.0
+"Northern-Ireland, Premiership",22,1265.0
+"Northern-Ireland, Premiership",23,1365.0
+"Norway, 2. Division - Group 1",1,100.0
+"Norway, 2. Division - Group 1",2,200.0
+"Norway, 2. Division - Group 1",3,300.0
+"Norway, 2. Division - Group 1",4,400.0
+"Norway, Eliteserien",1,100.0
+"Norway, Eliteserien",2,200.0
+"Norway, Eliteserien",3,300.0
+"Norway, Eliteserien",4,400.0
+"Norway, Eliteserien",5,150.0
+"Norway, Eliteserien",6,250.0
+"Norway, Eliteserien",7,350.0
+"Norway, Eliteserien",8,90.0
+"Norway, Eliteserien",9,190.0
+"Norway, Eliteserien",10,290.0
+"Norway, Eliteserien",11,390.0
+"Norway, Eliteserien",12,180.0
+"Norway, Eliteserien",13,280.0
+"Norway, Eliteserien",14,380.0
+"Norway, Eliteserien",15,480.0
+"Norway, Eliteserien",16,580.0
+"Norway, Eliteserien",17,680.0
+"Norway, Eliteserien",18,780.0
+"Norway, Eliteserien",19,880.0
+"Norway, Eliteserien",20,980.0
+"Norway, Eliteserien",21,1080.0
+"Norway, Eliteserien",22,1180.0
+"Norway, Eliteserien",23,980.0
+"Norway, Eliteserien",24,710.0
+"Norway, Eliteserien",25,810.0
+"Norway, Eliteserien",26,910.0
+"Norway, Eliteserien",27,1010.0
+"Norway, Eliteserien",28,1110.0
+"Norway, Eliteserien",29,1210.0
+"Norway, Eliteserien",30,1310.0
+"Norway, Eliteserien",31,1410.0
+"Norway, Eliteserien",32,1510.0
+"Norway, Eliteserien",33,1285.0
+"Norway, Eliteserien",34,995.0
+"Norway, Eliteserien",35,1095.0
+"Norway, Eliteserien",36,1195.0
+"Norway, Eliteserien",37,1295.0
+"Norway, Eliteserien",38,1395.0
+"Norway, Eliteserien",39,1495.0
+"Norway, Eliteserien",40,1595.0
+"Norway, Eliteserien",41,1695.0
+"Norway, Eliteserien",42,1795.0
+"Norway, Eliteserien",43,1895.0
+"Norway, Eliteserien",44,1995.0
+"Norway, Eliteserien",45,2095.0
+"Norway, Eliteserien",46,2195.0
+"Norway, Eliteserien",47,2295.0
+"Romania, Liga II",1,100.0
+"Romania, Liga II",2,200.0
+"Romania, Liga II",3,300.0
+"Romania, Liga II",4,400.0
+"Romania, Liga II",5,500.0
+"Romania, Liga II",6,600.0
+"Romania, Liga II",7,400.0
+"Romania, Liga II",8,175.0
+"Romania, Liga II",9,275.0
+"Romania, Liga II",10,375.0
+"Romania, Liga II",11,475.0
+"Romania, Liga II",12,575.0
+"Romania, Liga II",13,375.0
+"Romania, Liga II",14,475.0
+"Romania, Liga II",15,575.0
+"Romania, Liga II",16,365.0
+"Romania, Liga II",17,465.0
+"Saudi-Arabia, Pro League",1,100.0
+"Saudi-Arabia, Pro League",2,-190.0
+"Saudi-Arabia, Pro League",3,-90.0
+"Scotland, League One",1,100.0
+"Scotland, League One",2,200.0
+"Scotland, League One",3,300.0
+"Scotland, League One",4,400.0
+"Scotland, League One",5,500.0
+"Scotland, League One",6,270.0
+"Scotland, League One",7,370.0
+"Scotland, League One",8,470.0
+"Scotland, League One",9,220.0
+"Scotland, League One",10,320.0
+"Scotland, League One",11,420.0
+"Scotland, League One",12,520.0
+"Scotland, League One",13,620.0
+"Scotland, League One",14,720.0
+"Scotland, League One",15,820.0
+"Scotland, League One",16,920.0
+"Scotland, League One",17,1020.0
+"Scotland, League One",18,1120.0
+"Serbia, Super Liga",1,100.0
+"Serbia, Super Liga",2,200.0
+"Serbia, Super Liga",3,300.0
+"Serbia, Super Liga",4,70.00000000000003
+"Serbia, Super Liga",5,-169.99999999999997
+"Serbia, Super Liga",6,-69.99999999999997
+"Serbia, Super Liga",7,-280.0
+"Serbia, Super Liga",8,-180.0
+"Serbia, Super Liga",9,-470.0
+"Serbia, Super Liga",10,-370.0
+"Serbia, Super Liga",11,-620.0
+"Serbia, Super Liga",12,-860.0
+"Serbia, Super Liga",13,-760.0
+"Serbia, Super Liga",14,-660.0
+"Serbia, Super Liga",15,-560.0
+"Serbia, Super Liga",16,-460.0
+"Serbia, Super Liga",17,-360.0
+"Serbia, Super Liga",18,-260.0
+"Serbia, Super Liga",19,-530.0
+"Serbia, Super Liga",20,-430.0
+"Serbia, Super Liga",21,-330.0
+"Serbia, Super Liga",22,-630.0
+"Serbia, Super Liga",23,-530.0
+"Serbia, Super Liga",24,-430.0
+"Serbia, Super Liga",25,-330.0
+"Serbia, Super Liga",26,-230.0
+"Serbia, Super Liga",27,-130.0
+"Serbia, Super Liga",28,-30.0
+"Serbia, Super Liga",29,-300.0
+"Serbia, Super Liga",30,-200.0
+"Serbia, Super Liga",31,-100.0
+"Serbia, Super Liga",32,0.0
+"Serbia, Super Liga",33,-225.0
+"Serbia, Super Liga",34,-125.0
+"Serbia, Super Liga",35,-25.0
+"Slovenia, 1. SNL",1,100.0
+"Slovenia, 1. SNL",2,200.0
+"Slovenia, 1. SNL",3,300.0
+"Slovenia, 1. SNL",4,400.0
+"Slovenia, 1. SNL",5,500.0
+"Slovenia, 1. SNL",6,600.0
+"Slovenia, 1. SNL",7,700.0
+"Slovenia, 1. SNL",8,800.0
+"Slovenia, 1. SNL",9,570.0
+"Slovenia, 1. SNL",10,670.0
+"Slovenia, 1. SNL",11,770.0
+"Slovenia, 1. SNL",12,480.0
+"Slovenia, 1. SNL",13,580.0
+"Slovenia, 1. SNL",14,680.0
+"Slovenia, 1. SNL",15,780.0
+"Slovenia, 1. SNL",16,880.0
+"Slovenia, 1. SNL",17,630.0
+"Slovenia, 1. SNL",18,730.0
+"Slovenia, 1. SNL",19,470.0
+"Slovenia, 1. SNL",20,190.0
+"Slovenia, 1. SNL",21,290.0
+"Slovenia, 1. SNL",22,390.0
+"Slovenia, 1. SNL",23,490.0
+"Slovenia, 1. SNL",24,590.0
+"Slovenia, 1. SNL",25,690.0
+"Slovenia, 1. SNL",26,430.0
+"Sweden, Allsvenskan",1,-275.0
+"Sweden, Allsvenskan",2,-175.0
+"Sweden, Allsvenskan",3,-75.0
+"Sweden, Allsvenskan",4,25.0
+"Sweden, Allsvenskan",5,125.0
+"Sweden, Allsvenskan",6,225.0
+"Sweden, Allsvenskan",7,325.0
+"Sweden, Allsvenskan",8,85.0
+"Sweden, Allsvenskan",9,185.0
+"Sweden, Allsvenskan",10,-75.0
+"Sweden, Allsvenskan",11,25.0
+"Sweden, Allsvenskan",12,125.0
+"Sweden, Allsvenskan",13,225.0
+"Sweden, Allsvenskan",14,325.0
+"Sweden, Allsvenskan",15,425.0
+"Sweden, Allsvenskan",16,135.0
+"Sweden, Allsvenskan",17,235.0
+"Sweden, Allsvenskan",18,335.0
+"Sweden, Allsvenskan",19,435.0
+"Sweden, Allsvenskan",20,535.0
+"Sweden, Allsvenskan",21,635.0
+"Sweden, Allsvenskan",22,410.0
+"Sweden, Allsvenskan",23,510.0
+"Sweden, Allsvenskan",24,610.0
+"Sweden, Allsvenskan",25,370.0
+"Sweden, Allsvenskan",26,470.0
+"Sweden, Allsvenskan",27,570.0
+"Sweden, Allsvenskan",28,340.0
+"Sweden, Allsvenskan",29,440.0
+"Sweden, Allsvenskan",30,190.0
+"Sweden, Allsvenskan",31,290.0
+"Sweden, Allsvenskan",32,390.0
+"Sweden, Allsvenskan",33,490.0
+"Sweden, Allsvenskan",34,590.0
+"Sweden, Allsvenskan",35,690.0
+"Sweden, Allsvenskan",36,430.0
+"Sweden, Allsvenskan",37,530.0
+"Sweden, Allsvenskan",38,630.0
+"Sweden, Allsvenskan",39,730.0
+"Sweden, Allsvenskan",40,830.0
+"Sweden, Allsvenskan",41,580.0
+"Sweden, Allsvenskan",42,680.0
+"Sweden, Allsvenskan",43,780.0
+"Sweden, Ettan - Norra",1,100.0
+"Sweden, Ettan - Norra",2,-129.99999999999997
+"Sweden, Ettan - Norra",3,-29.99999999999997
+"Sweden, Ettan - Norra",4,70.00000000000003
+"Sweden, Ettan - Norra",5,-159.99999999999994
+"Sweden, Ettan - Norra",6,-59.99999999999994
+"Sweden, Ettan - Norra",7,40.00000000000006
+"Sweden, Ettan - Norra",8,140.00000000000006
+"Sweden, Ettan - Norra",9,240.00000000000006
+"Sweden, Ettan - Norra",10,340.00000000000006
+"Sweden, Ettan - Norra",11,440.00000000000006
+"Sweden, Ettan - Norra",12,540.0
+"Sweden, Ettan - Norra",13,640.0
+"Sweden, Ettan - Norra",14,740.0
+"Sweden, Ettan - Norra",15,840.0
+"Sweden, Ettan - Norra",16,610.0
+"Sweden, Ettan - Norra",17,340.0
+"Sweden, Ettan - Norra",18,80.0
+"Sweden, Ettan - Norra",19,180.0
+"Sweden, Ettan - Norra",20,280.0
+"Sweden, Ettan - Norra",21,380.0
+"Sweden, Ettan - Södra",1,100.0
+"Sweden, Ettan - Södra",2,-120.00000000000003
+"Sweden, Ettan - Södra",3,-20.00000000000003
+"Sweden, Ettan - Södra",4,79.99999999999997
+"Sweden, Ettan - Södra",5,179.99999999999997
+"Sweden, Ettan - Södra",6,280.0
+"Sweden, Ettan - Södra",7,380.0
+"Sweden, Ettan - Södra",8,90.0
+"Sweden, Ettan - Södra",9,190.0
+"Sweden, Ettan - Södra",10,290.0
+"Sweden, Ettan - Södra",11,390.0
+"Sweden, Ettan - Södra",12,130.0
+"Sweden, Ettan - Södra",13,-160.0
+"Sweden, Ettan - Södra",14,-60.0
+"Sweden, Ettan - Södra",15,40.0
+"Sweden, Ettan - Södra",16,140.0
+"Sweden, Ettan - Södra",17,-120.0
+"Sweden, Ettan - Södra",18,-20.0
+"Sweden, Ettan - Södra",19,80.0
+"Sweden, Ettan - Södra",20,180.0
+"Sweden, Ettan - Södra",21,280.0
+"Sweden, Ettan - Södra",22,380.0
+"Sweden, Ettan - Södra",23,150.00000000000003
+"Sweden, Ettan - Södra",24,250.00000000000003
+"Sweden, Ettan - Södra",25,350.0
+"Sweden, Ettan - Södra",26,120.00000000000003
+"Sweden, Ettan - Södra",27,-179.99999999999997
+"Sweden, Ettan - Södra",28,-79.99999999999997
+"Sweden, Ettan - Södra",29,20.00000000000003
+"Sweden, Ettan - Södra",30,-280.0
+"Sweden, Ettan - Södra",31,-180.0
+"Sweden, Ettan - Södra",32,-80.0
+"Sweden, Superettan",1,100.0
+"Sweden, Superettan",2,200.0
+"Sweden, Superettan",3,-50.0
+"Sweden, Superettan",4,50.0
+"Sweden, Superettan",5,150.0
+"Sweden, Superettan",6,-75.0
+"Sweden, Superettan",7,-300.0
+"Sweden, Superettan",8,-200.0
+"Sweden, Superettan",9,-440.0
+"Sweden, Superettan",10,-340.0
+"Sweden, Superettan",11,-240.0
+"Sweden, Superettan",12,-465.0
+"Sweden, Superettan",13,-365.0
+"Sweden, Superettan",14,-615.0
+"Sweden, Superettan",15,-515.0
+"Sweden, Superettan",16,-415.0
+"Sweden, Superettan",17,-315.0
+"Sweden, Superettan",18,-215.0
+"Sweden, Superettan",19,-115.0
+"Sweden, Superettan",20,-405.0
+"Sweden, Superettan",21,-305.0
+"Sweden, Superettan",22,-545.0
+"Sweden, Superettan",23,-445.0
+"Sweden, Superettan",24,-345.0
+"Sweden, Superettan",25,-595.0
+"Sweden, Superettan",26,-495.0
+"Sweden, Superettan",27,-395.0
+"Sweden, Superettan",28,-295.0
+"Sweden, Superettan",29,-515.0
+"Sweden, Superettan",30,-415.0
+"Sweden, Superettan",31,-315.0
+"Sweden, Superettan",32,-585.0
+"Sweden, Superettan",33,-485.0
+"Sweden, Superettan",34,-385.0
+"Sweden, Superettan",35,-285.0
+"Sweden, Superettan",36,-185.0
+"Sweden, Superettan",37,-85.0
+"Sweden, Superettan",38,-335.0
+"Sweden, Superettan",39,-235.0
+"Sweden, Superettan",40,-135.0
+"Sweden, Superettan",41,-35.0
+"Sweden, Superettan",42,65.0
+"Sweden, Superettan",43,165.0
+"Sweden, Superettan",44,265.0
+"Sweden, Superettan",45,365.0
+"Sweden, Superettan",46,465.0
+"Sweden, Superettan",47,235.00000000000003
+"Sweden, Superettan",48,335.0
+"Sweden, Superettan",49,95.0
+"Sweden, Superettan",50,-145.0
+"Sweden, Superettan",51,-45.0
+"Sweden, Superettan",52,55.0
+"Sweden, Superettan",53,155.0
+"Sweden, Superettan",54,-95.0
+"Sweden, Superettan",55,5.0
+"Sweden, Superettan",56,105.0
+"Sweden, Superettan",57,205.0
+"Sweden, Superettan",58,305.0
+"Sweden, Superettan",59,405.0
+"Sweden, Superettan",60,505.0
+"Sweden, Superettan",61,605.0
+"Sweden, Superettan",62,355.0
+"Sweden, Superettan",63,105.0
+"Sweden, Superettan",64,205.0
+"Switzerland, Challenge League",1,-275.0
+"Switzerland, Challenge League",2,-535.0
+"Switzerland, Challenge League",3,-435.0
+"Switzerland, Challenge League",4,-335.0
+"Switzerland, Challenge League",5,-235.0
+"Switzerland, Challenge League",6,-495.0
+"Switzerland, Challenge League",7,-395.0
+"Switzerland, Challenge League",8,-295.0
+"Switzerland, Challenge League",9,-595.0
+"Switzerland, Challenge League",10,-855.0
+"Switzerland, Challenge League",11,-755.0
+"Switzerland, Challenge League",12,-655.0
+"Switzerland, Challenge League",13,-555.0
+"Switzerland, Challenge League",14,-455.0
+"Switzerland, Challenge League",15,-355.0
+"Switzerland, Challenge League",16,-255.0
+"Switzerland, Challenge League",17,-530.0
+"Switzerland, Challenge League",18,-430.0
+"Switzerland, Challenge League",19,-330.0
+"Switzerland, Challenge League",20,-230.0
+"Switzerland, Challenge League",21,-130.0
+"Switzerland, Challenge League",22,-30.0
+"Switzerland, Super League",1,100.0
+"Switzerland, Super League",2,200.0
+"Switzerland, Super League",3,300.0
+"Switzerland, Super League",4,400.0
+"Switzerland, Super League",5,125.0
+"Switzerland, Super League",6,225.0
+"Switzerland, Super League",7,325.0
+"Switzerland, Super League",8,425.0
+"Switzerland, Super League",9,525.0
+"Switzerland, Super League",10,625.0
+"Switzerland, Super League",11,355.0
+"Switzerland, Super League",12,455.0
+"Switzerland, Super League",13,555.0
+"Switzerland, Super League",14,655.0
+"Switzerland, Super League",15,755.0
+"Switzerland, Super League",16,495.0
+"Switzerland, Super League",17,595.0
+"Switzerland, Super League",18,695.0
+"Switzerland, Super League",19,795.0
+"Switzerland, Super League",20,895.0
+"Switzerland, Super League",21,995.0
+"Switzerland, Super League",22,1095.0
+"Switzerland, Super League",23,1195.0
+"Venezuela, Primera División",1,100.0
+"Venezuela, Primera División",2,200.0
+"Venezuela, Primera División",3,300.0
+"Venezuela, Primera División",4,400.0
+"Venezuela, Primera División",5,500.0
+"Venezuela, Primera División",6,600.0
+"Venezuela, Primera División",7,700.0
+"Venezuela, Primera División",8,800.0
+"Venezuela, Primera División",9,900.0
+"Venezuela, Primera División",10,1000.0
+"Venezuela, Primera División",11,1100.0
+"Venezuela, Primera División",12,1200.0
+"Venezuela, Primera División",13,1300.0
+"Venezuela, Primera División",14,1400.0
+"Venezuela, Primera División",15,1200.0
+"Venezuela, Primera División",16,970.0
+"Venezuela, Primera División",17,1070.0
+"Venezuela, Primera División",18,830.0
+"Venezuela, Primera División",19,930.0
+"Venezuela, Primera División",20,1030.0
+"Venezuela, Primera División",21,1130.0
+"Venezuela, Primera División",22,1230.0
+"Venezuela, Primera División",23,1330.0
+"Venezuela, Primera División",24,1430.0
+"Venezuela, Primera División",25,1530.0
+"Venezuela, Primera División",26,1330.0
+"Venezuela, Primera División",27,1430.0
+"Venezuela, Primera División",28,1530.0
+"Venezuela, Primera División",29,1630.0
+"Venezuela, Primera División",30,1730.0
+"Venezuela, Primera División",31,1830.0
+"Venezuela, Primera División",32,1930.0
+"Venezuela, Primera División",33,2030.0
+"Venezuela, Primera División",34,1790.0
+"Venezuela, Primera División",35,1890.0
+"Venezuela, Primera División",36,1690.0
+"Venezuela, Primera División",37,1540.0
+"Venezuela, Primera División",38,1640.0
+"Venezuela, Primera División",39,1740.0
+"Venezuela, Primera División",40,1840.0
+"Venezuela, Primera División",41,1650.0
