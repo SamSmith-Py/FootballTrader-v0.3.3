@@ -23,5 +23,5 @@ if __name__ == "__main__":
         print("Shutting down bot...")
 
     # Start AutoTrader (blocking loop)
-    # trader = AutoTrader()
+    trader = AutoTrader()
     # trader.start()
