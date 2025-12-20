@@ -15,7 +15,7 @@ import pandas as pd
 from betfairlightweight import filters
 
 
-
+api = betfairlightweight.APIClient(self.username, self.password, self.app_key)
 class AutoTrader:
     def __init__(self):
         # balance = api.account.get_account_funds()
@@ -204,8 +204,10 @@ class AutoTrader:
         try:
             get_scores = api.in_play_service.get_scores(event_ids=[event_id])
             # Get inplay state if available.
+            
             if len(get_scores) > 0:
                 for x in get_scores:
+                    
                     self.df.loc[idx, 'inplay_state'] = x.match_status
 
             # If time is over 3 hours past kick off then mark as finished
@@ -361,6 +363,7 @@ class AutoTrader:
                 back_price = api.betting.list_runner_book(market_id=str(self.df.loc[idx, 'marketID_match_odds']),
                                                         selection_id=58805,
                                                         price_projection={'priceData': ['EX_ALL_OFFERS']})
+                back_price[0].runners[0].sp.actual_sp
                 back_the_draw_price = back_price[0].runners[0].ex.available_to_back[0].price
                 self.df.loc[idx, 'back_price'] = back_the_draw_price
             except IndexError:

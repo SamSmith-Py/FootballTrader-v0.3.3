@@ -21,6 +21,12 @@ from core.settings import (
     TABLE_CURRENT,
     PAPER_MODE,
     BOT_VERSION,
+    LTD60_KO_WINDOW_MINUTES,
+    LTD60_MAX_ODDS_ACCEPT,
+    STAKE_LTD_PAPER,
+    STAKE_LTD_LIVE,
+    DRAW_SELECTION_ID,
+    LTD60_SECOND_ENTRY_ODDS
     
 )
 from core.db_helper import DBHelper
@@ -124,16 +130,16 @@ class LTD60(BaseStrategy):
             return  # already in
 
         # Require within KO window or in-play but early
-        if minutes_to_ko is not None and minutes_to_ko > KO_WINDOW_MINUTES:
+        if minutes_to_ko is not None and minutes_to_ko > LTD60_KO_WINDOW_MINUTES:
             return
 
         if d_price is None or d_price <= 0:
             return
-        if d_price > MAX_KO_LAY_ODDS:
+        if d_price > LTD60_MAX_ODDS_ACCEPT:
             # You could place PERSIST order at 4.0 here if you want.
             return
 
-        size = STAKE_PAPER if PAPER_MODE else STAKE_LIVE
+        size = STAKE_LTD_PAPER if PAPER_MODE else STAKE_LTD_LIVE
         if PAPER_MODE:
             # Record paper entry instantly
             self._order_snapshot(
@@ -193,7 +199,7 @@ class LTD60(BaseStrategy):
 
         # Avoid re-triggering: if x_ordered exists you can gate on that in the future.
         # Here we'll only add a second "paper" flag by bumping e_ordered to 2 and aggregating stake.
-        second_size = STAKE_PAPER if PAPER_MODE else STAKE_LIVE
+        second_size = STAKE_LTD_PAPER if PAPER_MODE else STAKE_LTD_LIVE
 
         # If price missing, try to pull quickly
         if d_price is None and api:
@@ -217,7 +223,7 @@ class LTD60(BaseStrategy):
             )
         else:
             try:
-                limit_order = filters.limit_order(size=second_size, price=float(SECOND_ENTRY_ODDS), persistence_type="PERSIST")
+                limit_order = filters.limit_order(size=second_size, price=float(LTD60_SECOND_ENTRY_ODDS), persistence_type="PERSIST")
                 instruction = filters.place_instruction(
                     order_type="LIMIT",
                     selection_id=DRAW_SELECTION_ID,

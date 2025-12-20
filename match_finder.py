@@ -59,10 +59,10 @@ class MatchFinder:
         self.hours = hours
 
     def run(self) -> None:
-        logger.info("MatchFinder run started. MF testing")
-        print(CONFIG_PATH)
+        logger.info("MatchFinder run started")
+        
         username, password, app_key = load_betfair_credentials(CONFIG_PATH)
-       
+        
         
         with BetfairSession(username, password, app_key) as api:
             
@@ -315,10 +315,10 @@ class MatchFinder:
 
 # ========= Entry point =========
 if __name__ == "__main__":
-    try:
+    """try:
         print('test')
         mf = MatchFinder(hours=BETFAIR_HOURS_LOOKAHEAD)
         mf.run()
     except Exception as e:
         logger.exception(f"MatchFinder crashed: {e}")
-        raise
+        raise"""
