@@ -6,7 +6,7 @@ Fetches in-play data + runs strategies.
 from __future__ import annotations
 import time
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import List, Type, Optional, Dict, Any
 
 from core.settings import (
@@ -70,16 +70,20 @@ class AutoTrader:
                 for row in rows:
                     ev = dict(row)
                     event_id = ev["event_id"]
-                     # IMPORTANT: refresh event snapshot after DB updates
-                    fresh = db.fetch_current(f"SELECT * FROM {TABLE_CURRENT} WHERE event_id=?", (event_id,))
+                    # IMPORTANT: refresh event snapshot after DB updates
+                    fresh = db.fetch_current(event_id)
                     if fresh:
                         ev = dict(fresh)
-
 
                     try:
                         # ===== Fetch Betfair in-play data =====
                         if api:
                             self._update_inplay_info(db, api, ev)
+                        fresh_after = db.fetch_current(event_id)
+                        if not fresh_after:
+                            continue  # it was archived (or removed)
+                        ev = dict(fresh_after)
+
                     except Exception as e:
                         logger.warning("Skipping live update for %s: %s", event_id, e)
 
@@ -100,10 +104,23 @@ class AutoTrader:
             # Short cooldown between ticks
             time.sleep(10)
 
+    def _compute_result(self, h: Optional[int], a: Optional[int]) -> Optional[int]:
+        if h is None or a is None:
+            return None
+        return 1 if int(h) != int(a) else 0
+
+
     def _update_inplay_info(self, db: DBHelper, api, ev: Dict[str, Any]):
         """Fetches in-play scores, red cards, market prices, SP (once), fav (once), and goal timeline."""
         event_id = ev["event_id"]
         market_id = ev.get("market_id_MATCH_ODDS")
+        inplay_status = None
+        time_elapsed = None
+        h_score = None
+        a_score = None
+        h_red = None
+        a_red = None
+
 
         # 1) In-play status & score
         try:
@@ -149,6 +166,36 @@ class AutoTrader:
             # If finished, set FT score (once)
             if inplay_status == "Finished" and h_score is not None and a_score is not None:
                 db.update_current(event_id, ft_score=f"{int(h_score)}-{int(a_score)}")
+            # ---- ARCHIVE ON FINISH ----
+            if inplay_status == "Finished":
+                # Re-read row to ensure ft_score exists (DBHelper enforces ft_score for archive)
+                row_now = db.fetch_current(event_id)
+                if row_now and row_now["ft_score"]:
+                    ft = row_now["ft_score"]
+                    if ft and "-" in ft:
+                        try:
+                            left, right = ft.split("-", 1)
+                            fth, fta = int(left.strip()), int(right.strip())
+                        except Exception:
+                            fth, fta = None, None
+                    else:
+                        fth, fta = None, None
+
+                    # If parsing failed but we have live scores, use them
+                    if (fth is None or fta is None) and h_score is not None and a_score is not None:
+                        fth, fta = int(h_score), int(a_score)
+                        ft = f"{fth}-{fta}"
+                        db.update_current(event_id, ft_score=ft)
+
+                    # Set result (1 decisive, 0 draw) and archive
+                    result_val = self._compute_result(fth, fta)
+                    if result_val is not None:
+                        db.update_current(event_id, result=result_val)
+
+                    # IMPORTANT: pnl stays NULL unless a strategy sets it
+                    # strategy should be 'None' if none assigned; that’s already your schema expectation
+                    db.archive_match(event_id)
+
 
         # 2) Market prices + market state + Starting Prices (once) + fav (once)
         if not market_id:
@@ -227,15 +274,29 @@ class AutoTrader:
             if fav_cur is None and effective_h_sp is not None and effective_a_sp is not None:
                 # Lower price = favourite
                 if float(effective_h_sp) < float(effective_a_sp):
-                    updates["fav"] = "H"
+                    updates["fav"] = 1
                 elif float(effective_a_sp) < float(effective_h_sp):
-                    updates["fav"] = "A"
+                    updates["fav"] = 2
                 else:
-                    updates["fav"] = "EQUAL"
+                    updates["fav"] = 0
 
             if updates:
                 db.update_current(event_id, **updates)
-
+        
+        kickoff = row["kickoff"] if row else None
+        if kickoff and inplay_status not in ("Finished", "Cancelled", "Abandoned"):
+            try:
+                ko_dt = datetime.fromisoformat(kickoff.replace("Z", "+00:00"))
+                if datetime.now(timezone.utc) - ko_dt > timedelta(hours=4):
+                    # Force finish using last known score
+                    ft = row["ft_score"] or (f"{int(h_score)}-{int(a_score)}" if h_score is not None and a_score is not None else None)
+                    if ft:
+                        fth, fta = self._parse_ft(ft)
+                        result_val = self._compute_result(fth, fta)
+                        db.update_current(event_id, inplay_status="Finished", ft_score=ft, result=result_val)
+                        db.archive_match(event_id)
+            except Exception:
+                pass
 
     # ========== GOAL TIMELINE LOGIC ==========
     def _update_goal_timeline(
@@ -248,39 +309,59 @@ class AutoTrader:
         a_score: Optional[int],
         ft_score: Optional[str],
     ) -> None:
-        """Update h_goalsXX/a_goalsXX bands at 15-min intervals."""
-        row = db.fetch_one(
-            """
-            SELECT h_goals15,a_goals15,h_goals30,a_goals30,h_goals45,a_goals45,
-                   h_goals60,a_goals60,h_goals75,a_goals75,h_goals90,a_goals90
-            FROM current_matches WHERE event_id=?
-            """,
-            (event_id,),
-        )
+        """Update h_goalsXX/a_goalsXX bands at 15-min intervals (write-once per band, backfill on finish)."""
+
+        row = db.fetch_current(event_id)
         if not row:
             return
 
-        (
-            h15, a15, h30, a30, h45, a45,
-            h60, a60, h75, a75, h90, a90
-        ) = row
+        # Current stored bands
+        h15, a15 = row["h_goals15"], row["a_goals15"]
+        h30, a30 = row["h_goals30"], row["a_goals30"]
+        h45, a45 = row["h_goals45"], row["a_goals45"]
+        h60, a60 = row["h_goals60"], row["a_goals60"]
+        h75, a75 = row["h_goals75"], row["a_goals75"]
+        h90, a90 = row["h_goals90"], row["a_goals90"]
 
-        def maybe_write(tag, current_h, current_a):
-            if current_h is None and current_a is None and h_score is not None and a_score is not None:
-                db.update_current(event_id, **{f"h_goals{tag}": h_score, f"a_goals{tag}": a_score})
+        def maybe_write(tag: str, cur_h, cur_a):
+            if cur_h is None and cur_a is None and h_score is not None and a_score is not None:
+                db.update_current(event_id, **{f"h_goals{tag}": int(h_score), f"a_goals{tag}": int(a_score)})
 
+        # Write once when we enter each band (first value wins)
         if isinstance(time_elapsed, (int, float)):
             t = int(time_elapsed)
-            if t <= 15: maybe_write("15", h15, a15)
-            elif 15 < t <= 30: maybe_write("30", h30, a30)
-            elif 30 < t <= 45: maybe_write("45", h45, a45)
-            elif 45 < t <= 60: maybe_write("60", h60, a60)
-            elif 60 < t <= 75: maybe_write("75", h75, a75)
-            elif t > 75: maybe_write("90", h90, a90)
+            if t <= 15:
+                maybe_write("15", h15, a15)
+            elif 15 < t <= 30:
+                maybe_write("30", h30, a30)
+            elif 30 < t <= 45:
+                maybe_write("45", h45, a45)
+            elif 45 < t <= 60:
+                maybe_write("60", h60, a60)
+            elif 60 < t <= 75:
+                maybe_write("75", h75, a75)
+            elif t > 75:
+                maybe_write("90", h90, a90)
 
-        if inplay_status == "Finished" and ft_score:
-            fth, fta = map(int, ft_score.split("-")) if "-" in ft_score else (h_score, a_score)
-            for tag, current_h, current_a in [
+        # Backfill missing bands at finish using FT
+        if inplay_status == "Finished":
+            fth, fta = None, None
+            if ft_score and "-" in ft_score:
+                try:
+                    left, right = ft_score.split("-", 1)
+                    fth, fta = int(left.strip()), int(right.strip())
+                except Exception:
+                    fth, fta = None, None
+
+            # Fallback to last known scores if ft_score malformed/missing
+            if fth is None or fta is None:
+                if h_score is not None and a_score is not None:
+                    fth, fta = int(h_score), int(a_score)
+
+            if fth is None or fta is None:
+                return
+
+            for tag, cur_h, cur_a in [
                 ("15", h15, a15),
                 ("30", h30, a30),
                 ("45", h45, a45),
@@ -288,8 +369,19 @@ class AutoTrader:
                 ("75", h75, a75),
                 ("90", h90, a90),
             ]:
-                if current_h is None and current_a is None:
+                if cur_h is None and cur_a is None:
                     db.update_current(event_id, **{f"h_goals{tag}": fth, f"a_goals{tag}": fta})
+    
+    def _parse_ft(self, ft: str) -> tuple[Optional[int], Optional[int]]:
+        if not ft or "-" not in ft:
+            return None, None
+        try:
+            left, right = ft.split("-", 1)
+            return int(left.strip()), int(right.strip())
+        except Exception:
+            return None, None
+
+
 
 
 if __name__ == "__main__":

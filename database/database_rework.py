@@ -47,6 +47,7 @@ SCHEMA = {
         event_id      TEXT NOT NULL UNIQUE,   -- Unique while match is live
         kickoff       TEXT NOT NULL,          -- ISO8601 UTC
         inplay_status TEXT,                   -- 'KickOff','FirstHalfEnd','SecondHalfKickOff','Finished',...
+        time_elapsed  TEXT,
         ft_score      TEXT,
         ht_score      TEXT,
         h_score       INTEGER,
