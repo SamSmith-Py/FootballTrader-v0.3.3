@@ -14,9 +14,11 @@ from core.settings import (
     TABLE_CURRENT,
     PAPER_MODE,
     BOT_VERSION,
+    CONFIG_PATH
 )
 from core.db_helper import DBHelper
 from core.betfair_session import BetfairSession
+from core.config_loader import load_betfair_credentials
 
 # Strategy registry
 from autotrader.strategies.base_strategy import BaseStrategy
@@ -44,6 +46,7 @@ class AutoTrader:
     def start(self):
         """Main live loop: updates matches + runs strategies."""
         logger.info("AutoTrader run started. Waiting for matches...")
+        username, password, app_key = load_betfair_credentials(CONFIG_PATH)
 
         while True:
             with DBHelper(DB_PATH) as db:
@@ -61,7 +64,7 @@ class AutoTrader:
                 api = None
                 if needs_api:
                     try:
-                        api = BetfairSession().connect()
+                        api = BetfairSession(username, password, app_key).connect()
                     except Exception as e:
                         logger.warning(f"Betfair session unavailable: {e}")
                         api = None
@@ -201,12 +204,12 @@ class AutoTrader:
         if not market_id:
             return
 
-        market_books = api.betting.list_market_book(market_ids=[market_id])
+        market_books = api.betting.list_market_book(market_ids=[market_id], price_projection={'priceData': ['EX_ALL_OFFERS']})
         if not market_books:
             return
 
         book = market_books[0]
-        runners = getattr(book, "runners", []) or []
+        runners = getattr(book, "runners", None) or []
         market_state = getattr(book, "status", None)  # e.g. OPEN, SUSPENDED, CLOSED
 
         # Update prices (best available back)
@@ -217,16 +220,30 @@ class AutoTrader:
                 if atb and len(atb) > 0:
                     return atb[0].price
                 return None
+            
+            def best_lay_price(r):
+                ex = getattr(r, "ex", None)
+                atl = getattr(ex, "available_to_lay", None) if ex else None
+                if atl and len(atl) > 0:
+                    return atl[0].price
+                return None
 
-            h_price = best_back_price(runners[0])
-            a_price = best_back_price(runners[1])
-            d_price = best_back_price(runners[2])
+            h_back_price = best_back_price(runners[0])
+            a_back_price = best_back_price(runners[1])
+            d_back_price = best_back_price(runners[2])
+
+            h_lay_price = best_lay_price(runners[0])
+            a_lay_price = best_lay_price(runners[1])
+            d_lay_price = best_lay_price(runners[2])
 
             db.update_current(
                 event_id,
-                h_price=h_price,
-                a_price=a_price,
-                d_price=d_price,
+                h_back_price=h_back_price,
+                a_back_price=a_back_price,
+                d_back_price=d_back_price,
+                h_lay_price=h_lay_price,
+                a_lay_price=a_lay_price,
+                d_lay_price=d_lay_price,
                 market_state=market_state,
             )
 
@@ -324,7 +341,7 @@ class AutoTrader:
         h90, a90 = row["h_goals90"], row["a_goals90"]
 
         def maybe_write(tag: str, cur_h, cur_a):
-            if cur_h is None and cur_a is None and h_score is not None and a_score is not None:
+            if h_score is not None and a_score is not None:
                 db.update_current(event_id, **{f"h_goals{tag}": int(h_score), f"a_goals{tag}": int(a_score)})
 
         # Write once when we enter each band (first value wins)

@@ -29,7 +29,7 @@ TABLE_STREAM  = "match_stream_history"
 
 # ================= MATCHFINDER / SCHEDULER ==
 BETFAIR_HOURS_LOOKAHEAD = 12   # Fetch markets up to X hours from now
-SCHEDULE_MATCHFINDER_MIN = 1  # How often to run MatchFinder
+SCHEDULE_MATCHFINDER_MIN = 30  # How often to run MatchFinder
 # We’ll fetch all three; if a specific market is missing in a run it stays NULL and will be updated on a later run
 MARKETS_REQUIRED = ["MATCH_ODDS", "OVER_UNDER_45", "CORRECT_SCORE"]
 # Optional: pagination cap for catalogue results

@@ -12,10 +12,11 @@ import os
 import logging
 import time
 import threading
+from pathlib import Path
 
 from core.config_loader import load_betfair_credentials
 from core.settings import BOT_VERSION, SCHEDULE_MATCHFINDER_MIN
-from autotrader.scheduler import start_scheduler
+from autotrader.scheduler import start_scheduler, stop_scheduler
 from autotrader.autotrader import AutoTrader
 
 # -----------------------------------------------------------------------------
@@ -48,40 +49,40 @@ def safe_start_scheduler():
 # Main entrypoint
 # -----------------------------------------------------------------------------
 def main():
-    logger.info(f"Bot starting... (FootballTrader {BOT_VERSION})")
+    logger.info("Bot starting... (FootballTrader %s)", BOT_VERSION)
     cwd = os.getcwd()
-    logger.info(f"CWD = {cwd}")
+    logger.info("CWD = %s", cwd)
 
-    # Config
-    config_path = os.path.join(cwd, "config", "config.ini")
-    logger.info(f"config.ini exists = {os.path.exists(config_path)}")
-    if not os.path.exists(config_path):
+    # Prefer absolute path anchored to this file, not the shell working directory
+    base_dir = Path(__file__).resolve().parent
+    config_path = base_dir / "config" / "config.ini"
+    logger.info("config.ini exists = %s", config_path.exists())
+    if not config_path.exists():
         logger.error("Missing config.ini! Bot cannot start.")
         return
 
-    # Load config (ensures credentials + constants available)
-    load_betfair_credentials(config_path)
+    # Load config/credentials
+    load_betfair_credentials(str(config_path))
 
-    # Start scheduler thread (MatchFinder every N minutes)
+    # Start scheduler in the background
     safe_start_scheduler()
-    # logger.info(f"Scheduler started: MatchFinder every {SCHEDULE_MATCHFINDER_MIN} minutes.")
-    # Keep main thread alive indefinitely
-    try:
-        while True:
-            time.sleep(60)
-    except KeyboardInterrupt:
-        logger.info("Bot stopped manually. Exiting...")
+    logger.info("Scheduler active: MatchFinder every %s minutes.", SCHEDULE_MATCHFINDER_MIN)
 
-    # Start AutoTrader (main loop)
-    """trader = AutoTrader()
+    # Run AutoTrader in the foreground (this blocks forever)
+    trader = AutoTrader()
     try:
         trader.start()
     except KeyboardInterrupt:
-        logger.info("🛑 Bot stopped by user (CTRL+C).")
+        logger.info("Bot stopped by user (CTRL+C).")
     except Exception as e:
-        logger.exception(f"❌ AutoTrader crashed: {e}")
+        logger.exception("AutoTrader crashed: %s", e)
     finally:
-        logger.info("⚙️ FootballTrader shutting down gracefully...")"""
+        # Stop scheduler cleanly (optional, but tidy)
+        try:
+            stop_scheduler()
+        except Exception:
+            pass
+        logger.info("FootballTrader shutting down.")
 
 
 # -----------------------------------------------------------------------------

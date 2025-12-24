@@ -315,10 +315,10 @@ class MatchFinder:
 
 # ========= Entry point =========
 if __name__ == "__main__":
-    """try:
+    try:
         print('test')
         mf = MatchFinder(hours=BETFAIR_HOURS_LOOKAHEAD)
         mf.run()
     except Exception as e:
         logger.exception(f"MatchFinder crashed: {e}")
-        raise"""
+        raise

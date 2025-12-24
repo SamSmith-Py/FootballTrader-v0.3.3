@@ -327,6 +327,8 @@ class AutoTrader:
         if self.df.loc[idx, 'strategy'] == 'LTD':
             try:
                 # Get current lay price.
+                market_books = api.betting.list_market_book(market_ids=[market_id])
+                market_books[0].runners[0].sp.actual_sp
                 lay_price = api.betting.list_runner_book(market_id=str(self.df.loc[idx, 'marketID_match_odds']),
                                                         selection_id=58805,
                                                         price_projection={'priceData': ['EX_ALL_OFFERS']})
