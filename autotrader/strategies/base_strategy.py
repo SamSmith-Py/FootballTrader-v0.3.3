@@ -190,7 +190,7 @@ class BaseStrategy:
             return None
 
         result = result_val
-        stake_matched = ev.get("e_matched")
+        stake_matched = ev.get("e_matched") if PAPER_MODE else ev.get("e_matched") * 0.98
         liab = 0 - ev.get("liability")
 
         if result not in (0, 1) or stake_matched is None or liab is None:

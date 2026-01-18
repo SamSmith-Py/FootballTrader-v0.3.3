@@ -1,26 +1,60 @@
-2026-01-11 00:18:08,039 [INFO] LTD60 | ASSIGNED | English WSL | Chelsea (W) v West Ham United (W)
-2026-01-11 00:18:08,661 [INFO] LTD60 | ASSIGNED | English WSL | Tottenham (W) v Leicester City (W)
-2026-01-11 00:18:08,788 [INFO] LTD60 | ASSIGNED | English WSL | Aston Villa (W) v Brighton (W)
-2026-01-11 00:18:09,060 [INFO] LTD60 | ASSIGNED | English WSL | Man City (W) v Everton (W)
-2026-01-11 00:48:11,069 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Leon v Cruz Azul | price=4.1 size=100.0
-2026-01-11 00:48:11,291 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Santos Laguna v Necaxa | price=3.85 size=100.0
-2026-01-11 02:19:25,355 [INFO] LTD60 | ASSIGNED | Greek Super League | Levadiakos v NFC Volos
-2026-01-11 02:48:00,954 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Monterrey v Toluca | price=3.85 size=100.0
-2026-01-11 02:49:43,396 [INFO] LTD60 | ASSIGNED | English WSL | Liverpool (W) v London City Lionesses
-2026-01-11 03:19:50,160 [INFO] LTD60 | ASSIGNED | Cypriot 1st Division | Anorthosis v Ethnikos Achnas
-2026-01-11 03:19:50,437 [INFO] LTD60 | ASSIGNED | Cypriot 1st Division | Enosis Neon Paralimni v Apollon Limassol
-2026-01-11 03:50:13,539 [INFO] LTD60 | ASSIGNED | Greek Super League | OFI v Asteras Tripolis
-2026-01-11 03:50:14,085 [INFO] LTD60 | ASSIGNED | UAE Arabian Gulf League | Al Ahli (UAE) v Al Wasl
-2026-01-11 05:51:32,886 [INFO] LTD60 | ASSIGNED | Greek Super League | Aris v AEK Athens
-2026-01-11 06:21:56,511 [INFO] LTD60 | ASSIGNED | Mexican Liga MX | Pumas UNAM v Queretaro
-2026-01-11 07:22:22,087 [INFO] LTD60 | ASSIGNED | Greek Super League | Panathinaikos v Panserraikos
-2026-01-11 08:18:35,426 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Indonesian Super League | Persib Bandung v Persija Jakarta | price=3.5 size=100.0
-2026-01-11 08:18:35,610 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Indonesian Super League | Semen Padang v Persis Solo | price=3.55 size=100.0
-2026-01-11 08:18:35,977 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Indonesian Super League | Arema Cronus v Persik Kediri | price=3.5 size=100.0
-2026-01-11 08:48:02,551 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Malaysian Super League | Pulau Pinang v Melaka FC | price=4.5 size=100.0
-2026-01-11 10:21:26,672 [INFO] LTD60 | ENTRY1_CANCEL_TRIGGER | Malaysian Super League | Pulau Pinang v Melaka FC | reason=UNMATCHED BY 60MIN betid=None price=4.5
-2026-01-11 10:21:26,672 [INFO] LTD60 | ENTRY1_CANCELLED | Malaysian Super League | Pulau Pinang v Melaka FC | reason=UNMATCHED BY 60MIN betid=None
-2026-01-11 11:48:09,671 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English WSL | Chelsea (W) v West Ham United (W) | price=4.5 size=100.0
-2026-01-11 11:48:10,322 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English WSL | Tottenham (W) v Leicester City (W) | price=4.2 size=100.0
-2026-01-11 11:48:10,535 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English WSL | Aston Villa (W) v Brighton (W) | price=4.2 size=100.0
-2026-01-11 11:48:10,879 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English WSL | Man City (W) v Everton (W) | price=4.5 size=100.0
+2026-01-18 00:36:31,785 [INFO] LTD60 | ASSIGNED | German Bundesliga 2 | Kaiserslautern v Hannover
+2026-01-18 00:36:31,912 [INFO] LTD60 | ASSIGNED | German Bundesliga 2 | Bochum v SV Darmstadt
+2026-01-18 00:36:32,039 [INFO] LTD60 | ASSIGNED | German Bundesliga 2 | Holstein Kiel v Paderborn
+2026-01-18 00:48:09,168 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Tigres v Toluca | price=3.65 size=100.0
+2026-01-18 01:06:49,810 [INFO] LTD60 | ASSIGNED | Swiss Super League | Servette v FC Zurich
+2026-01-18 01:06:50,085 [INFO] LTD60 | ASSIGNED | UAE Arabian Gulf League | Bani Yas v Al Bataeh
+2026-01-18 02:07:15,289 [INFO] LTD60 | ASSIGNED | French Ligue 1 | Strasbourg v Metz
+2026-01-18 02:07:15,942 [INFO] LTD60 | ASSIGNED | Cypriot 1st Division | Omonia v Anorthosis
+2026-01-18 02:53:13,357 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Cruz Azul v Puebla | price=4.5 size=100.0
+2026-01-18 02:54:08,173 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Tijuana v Atletico San Luis | price=3.85 size=100.0
+2026-01-18 03:08:11,669 [INFO] LTD60 | ASSIGNED | Cypriot 1st Division | AEK Larnaca v Digenis Ypsona
+2026-01-18 03:08:12,196 [INFO] LTD60 | ASSIGNED | Greek Super League | Athlitiki Enosi Larissa v Aris
+2026-01-18 03:38:35,159 [INFO] LTD60 | ASSIGNED | Saudi Professional League | Al-Hazm (KSA) v Al-Quadisiya (KSA)
+2026-01-18 03:38:35,783 [INFO] LTD60 | ASSIGNED | Swiss Super League | Grasshoppers Zurich v Thun
+2026-01-18 03:38:36,065 [INFO] LTD60 | ASSIGNED | Swiss Super League | FC Basel v Sion
+2026-01-18 04:09:03,216 [INFO] LTD60 | ASSIGNED | UAE Arabian Gulf League | Al Sharjah v Al-Ittihad Kalba
+2026-01-18 04:39:33,948 [INFO] LTD60 | ASSIGNED | French Ligue 1 | Rennes v Le Havre
+2026-01-18 04:39:34,075 [INFO] LTD60 | ASSIGNED | French Ligue 1 | Nantes v Paris FC
+2026-01-18 05:10:06,200 [INFO] LTD60 | ASSIGNED | Cypriot 1st Division | Apollon Limassol v APOEL
+2026-01-18 05:10:06,505 [INFO] LTD60 | ASSIGNED | Greek Super League | PAOK v OFI
+2026-01-18 05:40:39,660 [INFO] LTD60 | ASSIGNED | Saudi Professional League | Al Riyadh SC v Al-Taawoun Buraidah
+2026-01-18 05:40:39,947 [INFO] LTD60 | ASSIGNED | Saudi Professional League | NEOM Sports Club v Al-Hilal
+2026-01-18 06:11:13,068 [INFO] LTD60 | ASSIGNED | Mexican Liga MX | Pumas UNAM v Leon
+2026-01-18 07:11:40,968 [INFO] LTD60 | ASSIGNED | Greek Super League | AEK Athens v Panathinaikos
+2026-01-18 07:41:59,930 [INFO] LTD60 | ASSIGNED | German 3 Liga | Stuttgart II v Duisburg
+2026-01-18 07:42:08,796 [INFO] LTD60 | ASSIGNED | German 3 Liga | Schweinfurt v Viktoria Koln
+2026-01-18 07:42:14,510 [INFO] LTD60 | ASSIGNED | German 3 Liga | TSV Havelse v Hoffenheim II
+2026-01-18 08:12:32,967 [INFO] LTD60 | ASSIGNED | French Ligue 1 | Lyon v Brest
+2026-01-18 11:15:52,629 [INFO] LTD60 | ASSIGNED | Mexican Liga MX | Santos Laguna v FC Juarez
+2026-01-18 11:18:14,970 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Singapore Premier League | Geylang International v Lion City Sailors FC | price=4.5 size=100.0
+2026-01-18 11:18:16,246 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Singapore Premier League | Balestier Khalsa v Hougang Utd | price=4.5 size=100.0
+2026-01-18 12:18:04,121 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German Bundesliga 2 | Kaiserslautern v Hannover | price=3.8 size=100.0
+2026-01-18 12:18:04,328 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German Bundesliga 2 | Bochum v SV Darmstadt | price=3.55 size=100.0
+2026-01-18 12:18:04,519 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German Bundesliga 2 | Holstein Kiel v Paderborn | price=3.65 size=100.0
+2026-01-18 12:18:04,744 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German 3 Liga | Stuttgart II v Duisburg | price=3.7 size=100.0
+2026-01-18 12:48:26,804 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Swiss Super League | Servette v FC Zurich | price=4.4 size=100.0
+2026-01-18 12:53:16,507 [INFO] LTD60 | ENTRY1_PAPER_EXEC | UAE Arabian Gulf League | Bani Yas v Al Bataeh | price=3.75 size=100.0
+2026-01-18 13:17:19,730 [INFO] LTD60 | ASSIGNED | Mexican Liga MX | Pachuca v CF America
+2026-01-18 13:48:06,961 [INFO] LTD60 | ENTRY1_PAPER_EXEC | French Ligue 1 | Strasbourg v Metz | price=4.5 size=100.0
+2026-01-18 13:48:07,772 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Cypriot 1st Division | Omonia v Anorthosis | price=4.5 size=100.0
+2026-01-18 14:48:33,968 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Cypriot 1st Division | AEK Larnaca v Digenis Ypsona | price=4.5 size=100.0
+2026-01-18 14:48:34,806 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Greek Super League | Athlitiki Enosi Larissa v Aris | price=3.25 size=100.0
+2026-01-18 15:03:21,908 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Saudi Professional League | Al-Hazm (KSA) v Al-Quadisiya (KSA) | price=4.5 size=100.0
+2026-01-18 15:18:14,677 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Swiss Super League | Grasshoppers Zurich v Thun | price=3.7 size=100.0
+2026-01-18 15:18:15,027 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Swiss Super League | FC Basel v Sion | price=3.85 size=100.0
+2026-01-18 15:18:15,248 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German 3 Liga | Schweinfurt v Viktoria Koln | price=4.4 size=100.0
+2026-01-18 15:33:28,454 [INFO] LTD60 | ENTRY1_PAPER_EXEC | UAE Arabian Gulf League | Al Sharjah v Al-Ittihad Kalba | price=4.1 size=100.0
+2026-01-18 16:03:09,316 [INFO] LTD60 | ENTRY1_PAPER_EXEC | French Ligue 1 | Rennes v Le Havre | price=4.5 size=100.0
+2026-01-18 16:03:09,552 [INFO] LTD60 | ENTRY1_PAPER_EXEC | French Ligue 1 | Nantes v Paris FC | price=3.3 size=100.0
+2026-01-18 16:25:25,352 [INFO] LTD60 | ENTRY1_CANCEL_TRIGGER | Cypriot 1st Division | AEK Larnaca v Digenis Ypsona | reason=UNMATCHED BY 60MIN betid=None price=4.5
+2026-01-18 16:25:25,352 [INFO] LTD60 | ENTRY1_CANCELLED | Cypriot 1st Division | AEK Larnaca v Digenis Ypsona | reason=UNMATCHED BY 60MIN betid=None
+2026-01-18 16:48:08,102 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Cypriot 1st Division | Apollon Limassol v APOEL | price=3.2 size=100.0
+2026-01-18 16:48:08,463 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Greek Super League | PAOK v OFI | price=4.5 size=100.0
+2026-01-18 17:18:09,735 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Saudi Professional League | Al Riyadh SC v Al-Taawoun Buraidah | price=3.9 size=100.0
+2026-01-18 17:18:10,131 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Saudi Professional League | NEOM Sports Club v Al-Hilal | price=4.5 size=100.0
+2026-01-18 17:37:59,739 [INFO] LTD60 | ENTRY2_PAPER_EXEC | French Ligue 1 | Rennes v Le Havre | price=2.46 size=200.0
+2026-01-18 17:48:17,130 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Mexican Liga MX | Pumas UNAM v Leon | price=3.6 size=100.0
+2026-01-18 18:18:19,478 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German 3 Liga | TSV Havelse v Hoffenheim II | price=4.5 size=100.0
+2026-01-18 18:20:42,152 [INFO] LTD60 | ENTRY1_CANCEL_TRIGGER | Greek Super League | PAOK v OFI | reason=UNMATCHED BY 60MIN betid=None price=4.5
+2026-01-18 18:20:42,152 [INFO] LTD60 | ENTRY1_CANCELLED | Greek Super League | PAOK v OFI | reason=UNMATCHED BY 60MIN betid=None
