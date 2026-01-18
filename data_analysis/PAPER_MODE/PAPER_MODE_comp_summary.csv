@@ -1,17 +1,22 @@
 comp,matches,pnl_sum,pnl_avg,win_rate,max_drawdown,max_win_streak,max_loss_streak
+Saudi Professional League,39,1095.0,28.08,82.05,-600.0,9.0,1.0
+Cypriot 1st Division,19,1000.0,52.63,73.68,-600.0,5.0,1.0
+Malaysian Super League,12,800.0,66.67,66.67,0.0,6.0,0.0
 English Sky Bet League 2,26,740.0,28.46,80.77,-340.0,9.0,1.0
-Saudi Professional League,23,725.0,31.52,82.61,-600.0,9.0,1.0
-Cypriot 1st Division,12,500.0,41.67,83.33,-600.0,5.0,1.0
-Indonesian Super League,19,440.0,23.16,84.21,-620.0,9.0,2.0
-Mexican Liga MX,7,335.0,47.86,85.71,-265.0,4.0,1.0
+Mexican Liga MX,22,715.0,32.5,81.82,-450.0,11.0,1.0
+Indonesian Super League,21,640.0,30.48,85.71,-620.0,9.0,2.0
+Singapore Premier League,4,400.0,100.0,100.0,0.0,4.0,0.0
+French Ligue 1,17,379.0,22.29,70.59,-496.0,5.0,1.0
+Swiss Super League,6,360.0,60.0,83.33,-340.0,4.0,1.0
+English Sky Bet League 1,48,310.0,6.46,75.0,-1545.0,6.0,3.0
 Northern Irish Premiership,10,250.0,25.0,80.0,-550.0,4.0,2.0
-Malaysian Super League,6,200.0,33.33,33.33,0.0,2.0,0.0
-English U21 Pro Development League,1,100.0,100.0,100.0,0.0,1.0,0.0
+German Bundesliga 2,9,200.0,22.22,77.78,-400.0,5.0,1.0
+German 3 Liga,9,100.0,11.11,77.78,-600.0,4.0,2.0
 Portuguese Primeira Liga,1,100.0,100.0,100.0,0.0,1.0,0.0
-French Ligue 1,9,75.0,8.33,66.67,-280.0,3.0,1.0
-English National League North,22,-130.0,-5.91,72.73,-1130.0,7.0,2.0
-UAE Arabian Gulf League,2,-190.0,-95.0,50.0,0.0,1.0,1.0
-Greek Super League,6,-230.0,-38.33,50.0,-250.0,3.0,1.0
-Scottish League One,5,-290.0,-58.0,60.0,-490.0,1.0,1.0
+Greek Super League,9,70.0,7.78,66.67,-250.0,3.0,1.0
+English U21 Pro Development League,10,-100.0,-10.0,60.0,-600.0,4.0,1.0
+Scottish League One,6,-190.0,-31.67,66.67,-490.0,2.0,1.0
+English National League North,34,-245.0,-7.21,70.59,-780.0,11.0,2.0
 English WSL,6,-330.0,-55.0,50.0,-280.0,2.0,1.0
-English Sky Bet League 1,36,-550.0,-15.28,69.44,-1395.0,6.0,2.0
+Welsh Premiership,6,-395.0,-65.83,33.33,-595.0,2.0,2.0
+UAE Arabian Gulf League,9,-705.0,-78.33,55.56,-815.0,3.0,2.0
