@@ -1,0 +1,30 @@
+2026-01-16 01:02:25,023 [INFO] LTD60 | ASSIGNED | English U21 Pro Development League | Colchester United U21 v Bournemouth U21
+2026-01-16 01:32:53,394 [INFO] LTD60 | ASSIGNED | English U21 Pro Development League | Millwall U21 v Swansea U21
+2026-01-16 01:32:53,521 [INFO] LTD60 | ASSIGNED | English U21 Pro Development League | Queens Park Rangers U21 v Brentford U21
+2026-01-16 02:03:13,102 [INFO] LTD60 | ASSIGNED | Saudi Professional League | Al Najma Club v Al-Fateh (KSA)
+2026-01-16 03:03:42,156 [INFO] LTD60 | ASSIGNED | Saudi Professional League | Al-Khaleej Saihat v Al-Akhdoud
+2026-01-16 05:35:00,864 [INFO] LTD60 | ASSIGNED | German Bundesliga 2 | Braunschweig v FC Magdeburg
+2026-01-16 05:35:01,135 [INFO] LTD60 | ASSIGNED | Saudi Professional League | Al-Ittihad v Al-Ettifaq
+2026-01-16 05:35:01,263 [INFO] LTD60 | ASSIGNED | German Bundesliga 2 | Fortuna Dusseldorf v Arminia Bielefeld
+2026-01-16 06:05:09,017 [INFO] LTD60 | ASSIGNED | German 3 Liga | Jahn Regensburg v Ingolstadt
+2026-01-16 06:05:09,289 [INFO] LTD60 | ASSIGNED | French Ligue 1 | Monaco v Lorient
+2026-01-16 08:06:36,686 [INFO] LTD60 | ASSIGNED | French Ligue 1 | Paris St-G v Lille
+2026-01-16 11:18:30,761 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Singapore Premier League | Tampines Rovers v Courts Young Lions | price=4.5 size=100.0
+2026-01-16 12:48:08,015 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English U21 Pro Development League | Colchester United U21 v Bournemouth U21 | price=4.5 size=100.0
+2026-01-16 13:18:04,983 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English U21 Pro Development League | Millwall U21 v Swansea U21 | price=4.5 size=100.0
+2026-01-16 13:18:05,191 [INFO] LTD60 | ENTRY1_PAPER_EXEC | English U21 Pro Development League | Queens Park Rangers U21 v Brentford U21 | price=4.5 size=100.0
+2026-01-16 13:28:22,621 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Saudi Professional League | Al Najma Club v Al-Fateh (KSA) | price=4.2 size=100.0
+2026-01-16 14:33:22,719 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Saudi Professional League | Al-Khaleej Saihat v Al-Akhdoud | price=4.5 size=100.0
+2026-01-16 15:00:34,218 [INFO] LTD60 | ENTRY1_CANCEL_TRIGGER | English U21 Pro Development League | Queens Park Rangers U21 v Brentford U21 | reason=UNMATCHED BY 60MIN betid=None price=4.5
+2026-01-16 15:00:34,218 [INFO] LTD60 | ENTRY1_CANCELLED | English U21 Pro Development League | Queens Park Rangers U21 v Brentford U21 | reason=UNMATCHED BY 60MIN betid=None
+2026-01-16 15:12:40,587 [INFO] LTD60 | ASSIGNED | Mexican Liga MX | Mazatlan FC v Monterrey
+2026-01-16 17:18:01,283 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German Bundesliga 2 | Braunschweig v FC Magdeburg | price=3.95 size=100.0
+2026-01-16 17:18:01,691 [INFO] LTD60 | ENTRY1_PAPER_EXEC | Saudi Professional League | Al-Ittihad v Al-Ettifaq | price=4.5 size=100.0
+2026-01-16 17:18:01,919 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German Bundesliga 2 | Fortuna Dusseldorf v Arminia Bielefeld | price=3.65 size=100.0
+2026-01-16 17:48:12,159 [INFO] LTD60 | ENTRY1_PAPER_EXEC | German 3 Liga | Jahn Regensburg v Ingolstadt | price=4.0 size=100.0
+2026-01-16 17:48:12,561 [INFO] LTD60 | ENTRY1_PAPER_EXEC | French Ligue 1 | Monaco v Lorient | price=4.5 size=100.0
+2026-01-16 19:21:23,528 [INFO] LTD60 | ENTRY2_PAPER_EXEC | French Ligue 1 | Monaco v Lorient | price=2.44 size=200.0
+2026-01-16 19:48:00,120 [INFO] LTD60 | ENTRY1_PAPER_EXEC | French Ligue 1 | Paris St-G v Lille | price=4.5 size=100.0
+2026-01-16 21:19:22,222 [INFO] LTD60 | ENTRY1_CANCEL_TRIGGER | French Ligue 1 | Paris St-G v Lille | reason=UNMATCHED BY 60MIN betid=None price=4.5
+2026-01-16 21:19:22,223 [INFO] LTD60 | ENTRY1_CANCELLED | French Ligue 1 | Paris St-G v Lille | reason=UNMATCHED BY 60MIN betid=None
+2026-01-16 23:47:48,665 [INFO] LTD60 | ASSIGNED | Singapore Premier League | Albirex Niigata (SIN) v Tanjong Pagar United
